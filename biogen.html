@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioBlox - RP Bio Generator for Roblox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="biogen.css">
+</head>
+
+<body>
+    <div class="bg-deco">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+    </div>
+    <div class="page-wrapper">
+        <!-- NAV -->
+        <nav>
+            <div class="logo">
+                <div class="logo-icon">🎭</div>
+                BioBlox
+            </div>
+            <ul class="nav-links">
+                <li><a href="biogen.html" class="active">Bio Generator</a></li>
+                <li><a href="flexcard.html">Flex Card Generator</a></li>
+            </ul>
+            <div class="mobile-menu"><span></span><span></span><span></span></div>
+        </nav>
+
+        <!-- HERO -->
+        <section class="hero">
+            <h1>Generate Your Perfect<br><span class="highlight">Roblox RP Bio!</span></h1>
+            <p>Stand out from the crowd! <em>Be unique. Copy & paste.</em></p>
+        </section>
+
+        <!-- FORM -->
+        <section class="form-section">
+            <div class="form-card">
+                <div class="dropdowns-row">
+                    <div class="select-group">
+                        <label>🎨 Style</label>
+                        <select id="sel-style">
+                            <option>Cute</option>
+                            <option>Emo</option>
+                            <option>Anime</option>
+                            <option>Aesthetic</option>
+                            <option>Preppy</option>
+                            <option>Gamer</option>
+                            <option>Cottagecore</option>
+                            <option>Y2K</option>
+                            <option>Grunge</option>
+                            <option>Baddie</option>
+                        </select>
+                    </div>
+                    <div class="select-group">
+                        <label>💀 Personality</label>
+                        <select id="sel-personality">
+                            <option>Shy</option>
+                            <option selected>Savage</option>
+                            <option>Soft</option>
+                            <option>Mysterious</option>
+                            <option>Chill</option>
+                            <option>Funny</option>
+                            <option>Flirty</option>
+                            <option>Toxic</option>
+                            <option>Wholesome</option>
+                            <option>Edgy</option>
+                        </select>
+                    </div>
+                    <div class="select-group">
+                        <label>🎮 Game</label>
+                        <select id="sel-game">
+                            <option>Brookhaven</option>
+                            <option>Bloxburg</option>
+                            <option>Berry Avenue</option>
+                            <option>Adopt Me</option>
+                            <option>Royal High</option>
+                            <option>MeepCity</option>
+                            <option>Da Hood</option>
+                            <option>Livetopia</option>
+                            <option>Greenville</option>
+                            <option>Murder Mystery 2</option>
+                            <option>Any RP Game</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="inputs-grid">
+                    <div class="input-group">
+                        <label>✏️ Character Name</label>
+                        <input type="text" id="inp-name" placeholder="e.g. Mia" autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <label>🎂 Age (RP age)</label>
+                        <input type="text" id="inp-age" placeholder="e.g. 15" autocomplete="off">
+                    </div>
+                    <div class="pronoun-group full-width">
+                        <label>💬 Pronouns</label>
+                        <div class="pronoun-buttons">
+                            <button type="button" class="pronoun-btn" data-pronouns="he/him"
+                                onclick="pickPronoun(this)">
+                                <span class="pronoun-icon">🚹</span> He/Him
+                            </button>
+                            <button type="button" class="pronoun-btn" data-pronouns="she/her"
+                                onclick="pickPronoun(this)">
+                                <span class="pronoun-icon">🚺</span> She/Her
+                            </button>
+                            <button type="button" class="pronoun-btn" data-pronouns="custom"
+                                onclick="pickPronoun(this)">
+                                <span class="pronoun-icon">✏️</span> Custom
+                            </button>
+                        </div>
+                        <input type="text" id="inp-custom-pronouns" class="custom-pronoun-input"
+                            placeholder="e.g. they/them" autocomplete="off" style="display:none;">
+                    </div>
+                    <div class="checkbox-item checked" id="chk-emoji" onclick="this.classList.toggle('checked')">
+                        <span class="checkbox-box"></span>
+                        Add emojis ✨
+                    </div>
+                </div>
+                <div class="decorator-section">
+                    <label class="decorator-label">✦ Border Style</label>
+                    <div class="decorator-options" id="decorator-options">
+                        <button class="deco-btn active" data-deco="none" onclick="pickDeco(this)">None</button>
+                        <button class="deco-btn" data-deco="sparkle" onclick="pickDeco(this)">✧˚ · text ·˚✧</button>
+                        <button class="deco-btn" data-deco="flower" onclick="pickDeco(this)">꒰ 🌸 ꒱ text</button>
+                        <button class="deco-btn" data-deco="stars" onclick="pickDeco(this)">★ text ★</button>
+                        <button class="deco-btn" data-deco="hearts" onclick="pickDeco(this)">♡₊˚ text ₊˚♡</button>
+                        <button class="deco-btn" data-deco="chains" onclick="pickDeco(this)">⛓️ text ⛓️</button>
+                        <button class="deco-btn" data-deco="clouds" onclick="pickDeco(this)">☁️ text ☁️</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="generate-section">
+            <button class="btn-generate" onclick="generateBios()">
+                <span class="bounce">✨</span> GENERATE MY BIO <span class="bounce">✨</span>
+            </button>
+        </div>
+
+        <div class="fun-divider"><span>⭐ 🌈 ⭐</span></div>
+
+        <section class="results-section" id="results-section" style="display:none;">
+            <div class="results-header"><span class="emoji">📋</span> Your Generated Bios</div>
+            <div class="bio-cards" id="bio-cards"></div>
+            <div class="more-section">
+                <button class="btn-more" onclick="generateBios()">🔄 Generate More!</button>
+            </div>
+        </section>
+
+        <!-- REAL PREVIEW PROMPT -->
+        <div class="real-preview-prompt" id="real-preview-prompt" style="display:none;">
+            <p>👀 Want to see how it looks on <em>your actual profile?</em></p>
+            <div class="preview-username-row">
+                <input type="text" id="inp-roblox-username" placeholder="Enter your Roblox username..."
+                    autocomplete="off">
+                <button onclick="loadRealPreview()">🔍 Preview</button>
+            </div>
+        </div>
+
+        <section class="preview-section" id="preview-section" style="display:none;">
+            <div class="fun-divider"><span>👀 🎮 👀</span></div>
+            <div class="preview-header"><span class="emoji">📱</span> Roblox Profile Preview</div>
+            <div class="roblox-preview-card">
+                <div class="roblox-avatar-area">
+                    <div class="roblox-avatar-placeholder">🧑‍🎤</div>
+                </div>
+                <div class="roblox-info-area">
+                    <div class="roblox-username" id="preview-username">@Player</div>
+                    <div class="roblox-bio-box" id="preview-bio">Your bio will appear here...</div>
+                    <div class="roblox-stats">
+                        <div class="roblox-stat"><span class="stat-num" id="preview-friends">-</span><span
+                                class="stat-label">Friends</span></div>
+                        <div class="roblox-stat"><span class="stat-num" id="preview-followers">-</span><span
+                                class="stat-label">Followers</span></div>
+                        <div class="roblox-stat"><span class="stat-num" id="preview-following">-</span><span
+                                class="stat-label">Following</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="fun-divider"><span>💡 ✨ 💡</span></div>
+            <div class="about-card">
+                <h2>🎭 What is BioBlox?</h2>
+                <p>BioBlox is the <strong>ultimate free Roblox bio generator</strong> for RP players! Whether you play
+                    Brookhaven, Bloxburg, Berry Avenue, or any other RP game, we create the perfect bio for your Roblox
+                    profile in seconds.</p>
+                <div class="about-features">
+                    <div class="about-feature"><span class="about-icon">🎨</span><strong>10 Unique Styles</strong>
+                        <p>From Cute to Baddie, Anime to Y2K - find your vibe.</p>
+                    </div>
+                    <div class="about-feature"><span class="about-icon">🧠</span><strong>Smart Gender Detection</strong>
+                        <p>Enter your pronouns and bios adapt automatically.</p>
+                    </div>
+                    <div class="about-feature"><span class="about-icon">✨</span><strong>100K+ Combinations</strong>
+                        <p>Never get the same bio twice with our huge template library.</p>
+                    </div>
+                    <div class="about-feature"><span class="about-icon">📋</span><strong>One-Click Copy</strong>
+                        <p>Copy your bio instantly and paste it right into Roblox.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="fun-divider"><span>❓ 💬 ❓</span></div>
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item" onclick="this.classList.toggle('open')">
+                    <div class="faq-question"><span>What is BioBlox and how does it work?</span><span
+                            class="faq-arrow">▼</span></div>
+                    <div class="faq-answer">BioBlox is a free Roblox bio generator tool. Just pick your style,
+                        personality, enter your details, and hit Generate! We instantly create 4 unique bios you can
+                        copy and paste into your Roblox profile.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('open')">
+                    <div class="faq-question"><span>Is BioBlox completely free?</span><span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-answer">Yes! 100% free. Generate as many bios as you want, no sign-up required, no
+                        limits, no hidden fees.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('open')">
+                    <div class="faq-question"><span>Can I use these bios on any Roblox game?</span><span
+                            class="faq-arrow">▼</span></div>
+                    <div class="faq-answer">Absolutely! While we have game-specific options like Brookhaven and
+                        Bloxburg, the bios work for any Roblox experience. Select "Any RP Game" for a universal bio.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <span>© 2026 BioBlox 🎭 Made with 💖</span>
+            <div class="footer-links">
+                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+        </footer>
+    </div>
+    <script src="biogen.js"></script>
+</body>
+
+</html>
