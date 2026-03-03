@@ -304,20 +304,51 @@ function prepareCardForCapture(cardEl) {
         }
     });
 
-    // 3. Simple Blur Compensation
-    // Since we lose the 16px blur during download, a 0.4 black background looks too light.
-    // Changing it temporarily to 0.75 black gives the same dark visual weight while
-    // still letting the theme color shine through.
+    // 3. Frosted Glass Compensation
+    // Since html2canvas can't render backdrop-filter blur, we need to simulate
+    // the frosted glass effect. Instead of solid black, we use a semi-transparent
+    // version of the card's actual theme background blended with a dark overlay.
+    // This produces a result visually close to what the browser shows.
     const bottomPanel = cardEl.querySelector('.card-bottom-panel');
     if (bottomPanel) {
         saved.push({ el: bottomPanel, prop: 'background', val: bottomPanel.style.background });
-        bottomPanel.style.background = 'rgba(0, 0, 0, 0.75)';
+
+        // Get the card's computed background (theme gradient or solid color)
+        const cardBg = getComputedStyle(cardEl).backgroundColor;
+        // Parse the RGB values from the computed background
+        const rgbMatch = cardBg.match(/(\d+),\s*(\d+),\s*(\d+)/);
+        if (rgbMatch) {
+            const r = parseInt(rgbMatch[1]);
+            const g = parseInt(rgbMatch[2]);
+            const b = parseInt(rgbMatch[3]);
+            // Darken the theme color and apply at ~0.65 opacity for a frosted look
+            const dr = Math.floor(r * 0.35);
+            const dg = Math.floor(g * 0.35);
+            const db = Math.floor(b * 0.35);
+            bottomPanel.style.background = `rgba(${dr}, ${dg}, ${db}, 0.75)`;
+        } else {
+            // Fallback: use a softer dark overlay (not solid black)
+            bottomPanel.style.background = 'rgba(20, 15, 40, 0.65)';
+        }
     }
 
     const tierChip = cardEl.querySelector('.tier-chip');
     if (tierChip) {
         saved.push({ el: tierChip, prop: 'background', val: tierChip.style.background });
-        tierChip.style.background = 'rgba(0, 0, 0, 0.4)';
+        // Use same theme-tinted approach for the tier badge
+        const cardBg2 = getComputedStyle(cardEl).backgroundColor;
+        const rgbMatch2 = cardBg2.match(/(\d+),\s*(\d+),\s*(\d+)/);
+        if (rgbMatch2) {
+            const r2 = parseInt(rgbMatch2[1]);
+            const g2 = parseInt(rgbMatch2[2]);
+            const b2 = parseInt(rgbMatch2[3]);
+            const dr2 = Math.floor(r2 * 0.4);
+            const dg2 = Math.floor(g2 * 0.4);
+            const db2 = Math.floor(b2 * 0.4);
+            tierChip.style.background = `rgba(${dr2}, ${dg2}, ${db2}, 0.6)`;
+        } else {
+            tierChip.style.background = 'rgba(20, 15, 40, 0.5)';
+        }
     }
 
     return saved;
