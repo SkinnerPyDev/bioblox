@@ -19,6 +19,16 @@ function pickPronoun(btn) {
     }
 }
 
+function pickLength(btn) {
+    document.querySelectorAll('.length-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
+
+function getSelectedLength() {
+    const active = document.querySelector('.length-btn.active');
+    return active ? active.getAttribute('data-length') : 'short';
+}
+
 function getSelectedPronouns() {
     const activeBtn = document.querySelector('.pronoun-btn.active');
     if (!activeBtn) return '';
@@ -145,6 +155,31 @@ function applyDecorator(text, decoKey) {
     return d.pre + clean + d.suf;
 }
 
+// --- Gender-Priority Bio Pool Builder ---
+function getGenderPriorityPool(gender) {
+    // Returns bios in priority order: gender-specific first, then neutral, then mixed
+    let primary, secondary;
+    if (gender === 'f') {
+        primary = [...BIO_LINES.girl];
+        secondary = [...BIO_LINES.boy];
+    } else if (gender === 'm') {
+        primary = [...BIO_LINES.boy];
+        secondary = [...BIO_LINES.girl];
+    } else {
+        primary = [];
+        secondary = [...BIO_LINES.girl, ...BIO_LINES.boy];
+    }
+    const neutral = [...BIO_LINES.neutral];
+    shuffle(primary);
+    shuffle(neutral);
+    shuffle(secondary);
+    return [...primary, ...neutral, ...secondary];
+}
+
+function stripEmojis(text) {
+    return text.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '').trim();
+}
+
 function generateBios() {
     const style = document.getElementById('sel-style').value;
     const personality = document.getElementById('sel-personality').value;
@@ -154,11 +189,16 @@ function generateBios() {
     const pronouns = getSelectedPronouns();
     const useEmoji = document.getElementById('chk-emoji').classList.contains('checked');
     const decoKey = getSelectedDeco();
+    const length = getSelectedLength();
 
     const gender = detectGender(pronouns);
     const container = document.getElementById('bio-cards');
     container.innerHTML = '';
 
+    // Build gender-priority bio pool
+    const bioPool = getGenderPriorityPool(gender);
+
+    // Also get style titles and personality quotes for short/long modes
     const titlePool = [...TITLES[style]];
     const quotePool = [...QUOTES[personality]];
     shuffle(titlePool);
@@ -166,32 +206,95 @@ function generateBios() {
 
     let firstBioText = '';
 
+    // Build meta (shared across all lengths)
+    const metaParts = [];
+    if (pronouns) metaParts.push(pronouns);
+    if (age) metaParts.push(age);
+    metaParts.push(name);
+    if (game !== 'Any RP Game') metaParts.push(game.toLowerCase() + ' rp');
+    else metaParts.push('rp lover');
+    const meta = metaParts.join(' • ');
+
     for (let i = 0; i < 4; i++) {
-        let rawTitle = titlePool[i % titlePool.length];
-        let rawQuote = quotePool[i % quotePool.length];
-        let title = genderize(rawTitle, gender);
-        let quote = '"' + genderize(rawQuote, gender) + '"';
+        let bioCopyText = '';
+        let displayHTML = '';
 
-        const metaParts = [];
-        if (pronouns) metaParts.push(pronouns);
-        if (age) metaParts.push(age);
-        metaParts.push(name);
-        if (game !== 'Any RP Game') metaParts.push(game.toLowerCase() + ' rp');
-        else metaParts.push('rp lover');
-        const meta = metaParts.join(' • ');
+        if (length === 'oneliner') {
+            // ONE LINER: bio line + meta info
+            let line = bioPool[i % bioPool.length];
+            if (!useEmoji) line = stripEmojis(line);
+            if (decoKey !== 'none') line = applyDecorator(line, decoKey);
 
-        const rawTagPool = useEmoji ? TAGS[style].e : TAGS[style].n;
-        let tagPool = rawTagPool.map(t => genderize(t, gender));
-        tagPool = tagPool.map(t => masculinizeEmojis(t, gender));
-        const tags = shuffle([...tagPool]).slice(0, 2).join(' • ');
+            bioCopyText = line + '\n' + meta;
+            displayHTML = `
+                <div class="bio-title">${line}</div>
+                <div class="bio-meta">${meta}</div>
+            `;
 
-        title = masculinizeEmojis(title, gender);
-        quote = masculinizeEmojis(quote, gender);
+        } else if (length === 'short') {
+            // SHORT: title + meta + quote + tags (same as old Long)
+            let rawTitle = titlePool[i % titlePool.length];
+            let rawQuote = quotePool[i % quotePool.length];
+            let title = genderize(rawTitle, gender);
+            let quote = '"' + genderize(rawQuote, gender) + '"';
 
-        let displayTitle = useEmoji ? title : title.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '').trim();
-        if (decoKey !== 'none') displayTitle = applyDecorator(displayTitle, decoKey);
+            const rawTagPool = useEmoji ? TAGS[style].e : TAGS[style].n;
+            let tagPool = rawTagPool.map(t => genderize(t, gender));
+            tagPool = tagPool.map(t => masculinizeEmojis(t, gender));
+            const tags = shuffle([...tagPool]).slice(0, 2).join(' • ');
 
-        const bioCopyText = displayTitle + '\n' + meta + '\n' + quote + '\n' + tags;
+            title = masculinizeEmojis(title, gender);
+            quote = masculinizeEmojis(quote, gender);
+
+            let displayTitle = useEmoji ? title : stripEmojis(title);
+            if (decoKey !== 'none') displayTitle = applyDecorator(displayTitle, decoKey);
+
+            bioCopyText = displayTitle + '\n' + meta + '\n' + quote + '\n' + tags;
+            displayHTML = `
+                <div class="bio-title">${displayTitle}</div>
+                <div class="bio-meta">${meta}</div>
+                <div class="bio-quote">${quote}</div>
+                <div class="bio-tags">${tags}</div>
+            `;
+
+        } else {
+            // LONG: title + meta + extra bio line + quote + more tags (richer format)
+            let rawTitle = titlePool[i % titlePool.length];
+            let rawQuote = quotePool[i % quotePool.length];
+            let title = genderize(rawTitle, gender);
+            let quote = '"' + genderize(rawQuote, gender) + '"';
+
+            // Extra bio line from gender pool for richness
+            let extraLine = bioPool[i % bioPool.length];
+            if (!useEmoji) extraLine = stripEmojis(extraLine);
+
+            // Get a second quote for extra depth
+            let rawQuote2 = quotePool[(i + 2) % quotePool.length];
+            let quote2 = '"' + genderize(rawQuote2, gender) + '"';
+            quote2 = masculinizeEmojis(quote2, gender);
+
+            const rawTagPool = useEmoji ? TAGS[style].e : TAGS[style].n;
+            let tagPool = rawTagPool.map(t => genderize(t, gender));
+            tagPool = tagPool.map(t => masculinizeEmojis(t, gender));
+            const tags = shuffle([...tagPool]).slice(0, 3).join(' • ');
+
+            title = masculinizeEmojis(title, gender);
+            quote = masculinizeEmojis(quote, gender);
+
+            let displayTitle = useEmoji ? title : stripEmojis(title);
+            if (decoKey !== 'none') displayTitle = applyDecorator(displayTitle, decoKey);
+
+            bioCopyText = displayTitle + '\n' + meta + '\n' + extraLine + '\n' + quote + '\n' + quote2 + '\n' + tags;
+            displayHTML = `
+                <div class="bio-title">${displayTitle}</div>
+                <div class="bio-meta">${meta}</div>
+                <div class="bio-quote">${extraLine}</div>
+                <div class="bio-quote">${quote}</div>
+                <div class="bio-quote">${quote2}</div>
+                <div class="bio-tags">${tags}</div>
+            `;
+        }
+
         if (i === 0) firstBioText = bioCopyText;
 
         const card = document.createElement('div');
@@ -202,12 +305,7 @@ function generateBios() {
 
         const contentDiv = document.createElement('div');
         contentDiv.className = 'bio-content';
-        contentDiv.innerHTML = `
-            <div class="bio-title">${displayTitle}</div>
-            <div class="bio-meta">${meta}</div>
-            <div class="bio-quote">${quote}</div>
-            <div class="bio-tags">${tags}</div>
-        `;
+        contentDiv.innerHTML = displayHTML;
 
         const actionsDiv = document.createElement('div');
         actionsDiv.className = 'bio-actions';

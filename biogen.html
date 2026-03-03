@@ -119,6 +119,21 @@
                         <input type="text" id="inp-custom-pronouns" class="custom-pronoun-input"
                             placeholder="e.g. they/them" autocomplete="off" style="display:none;">
                     </div>
+                    <div class="length-group full-width">
+                        <label>📏 Bio Length</label>
+                        <div class="length-buttons">
+                            <button type="button" class="length-btn" data-length="oneliner" onclick="pickLength(this)">
+                                <span class="length-icon">📝</span> One Liner
+                            </button>
+                            <button type="button" class="length-btn active" data-length="short"
+                                onclick="pickLength(this)">
+                                <span class="length-icon">📄</span> Short
+                            </button>
+                            <button type="button" class="length-btn" data-length="long" onclick="pickLength(this)">
+                                <span class="length-icon">📜</span> Long
+                            </button>
+                        </div>
+                    </div>
                     <div class="checkbox-item checked" id="chk-emoji" onclick="this.classList.toggle('checked')">
                         <span class="checkbox-box"></span>
                         Add emojis ✨
@@ -247,6 +262,7 @@
             </div>
         </footer>
     </div>
+    <script src="bio-data.js"></script>
     <script src="biogen.js"></script>
 </body>
 

@@ -451,6 +451,66 @@ nav {
     font-size: 1rem;
 }
 
+.length-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    grid-column: 1/-1;
+}
+
+.length-group label {
+    font-family: 'Fredoka', sans-serif;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.length-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.length-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 1;
+    padding: 10px 18px;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    background: #faf5ff;
+    color: var(--text);
+    font-family: 'Fredoka', sans-serif;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .25s;
+    white-space: nowrap;
+}
+
+.length-btn:hover {
+    border-color: var(--purple);
+    transform: scale(1.05);
+    box-shadow: 0 3px 12px rgba(192, 132, 252, .15);
+}
+
+.length-btn.active {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: white;
+    border-color: var(--pink);
+    box-shadow: 0 4px 14px rgba(255, 107, 157, .3);
+    transform: scale(1.05);
+}
+
+.length-icon {
+    font-size: 1rem;
+}
+
 .custom-pronoun-input {
     margin-top: 8px;
     background: #faf5ff;
