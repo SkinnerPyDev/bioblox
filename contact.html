@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - BioBlox</title>
+    <meta name="description"
+        content="Get in touch with the BioBlox team. Contact us for questions, feedback, or support about our free Roblox bio generator and flex card tools.">
+    <meta name="theme-color" content="#fef7ff">
+    <link rel="icon" href="logo.webp" type="image/webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #ff6b9d;
+            --purple: #c084fc;
+            --blue: #60a5fa;
+            --bg: #fef7ff;
+            --text: #3b1f5e;
+            --text-light: #7c6a99;
+            --border: #f0e4f7;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 32px;
+            background: rgba(255, 255, 255, .85);
+            backdrop-filter: blur(16px);
+            border-bottom: 3px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 90px;
+            width: auto;
+            object-fit: contain;
+            margin: -20px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: .9rem;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 100px;
+            transition: all .25s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+        }
+
+        .content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 48px 24px 60px;
+        }
+
+        .content h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content>p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 28px;
+            font-size: .95rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .contact-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            transition: all .25s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(192, 132, 252, .15);
+            border-color: var(--purple);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-card h3 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            font-size: .85rem;
+            margin: 0;
+        }
+
+        .contact-card a {
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 24px 32px;
+            border-top: 3px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: .82rem;
+            color: var(--text-light);
+            background: rgba(255, 255, 255, .7);
+            font-weight: 500;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 600;
+            transition: color .2s;
+        }
+
+        footer a:hover {
+            color: var(--pink);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="biogen.html" class="logo">
+            <img src="logo.webp" alt="BioBlox Logo">
+        </a>
+        <ul class="nav-links">
+            <li><a href="biogen.html">Bio Generator</a></li>
+            <li><a href="flexcard.html">Flex Card</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>Contact Us 💬</h1>
+        <p>Got a question, suggestion, or just want to say hi? Reach out to us through any of the channels below!</p>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <h3>Email</h3>
+                <p><a href="mailto:hello@bioblox.com">hello@bioblox.com</a></p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">💬</div>
+                <h3>Discord</h3>
+                <p>Join our community server</p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">🐦</div>
+                <h3>Twitter / X</h3>
+                <p>Follow us for updates</p>
+            </div>
+        </div>
+
+        <p>We typically respond within 24-48 hours. For bug reports, please include your browser and device info so we
+            can help you faster! 🔧</p>
+    </div>
+
+    <footer>
+        <span>© 2026 BioBlox 🔥 Made with 💪</span>
+        <div class="footer-links">
+            <a href="terms.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+    </footer>
+</body>
+
+</html>
