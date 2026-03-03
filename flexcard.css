@@ -512,7 +512,6 @@ FLEX CARD GENERATOR - The Core Display
 .flex-card {
     width: 290px;
     height: 560px;
-    /* Increased from 520px to accommodate bottom badges and watermark */
     border-radius: 28px;
     position: relative;
     overflow: hidden;
@@ -689,7 +688,8 @@ FLEX CARD GENERATOR - The Core Display
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 20px 20px 12px;
+    padding: 16px 16px 8px;
+    /* Reduced from 20px padding */
 }
 
 .card-user-block {
@@ -701,8 +701,8 @@ FLEX CARD GENERATOR - The Core Display
 
 .card-display-name {
     font-family: 'Fredoka', sans-serif;
-    font-size: 1.15rem;
-    /* Slightly smaller to accommodate two lines better */
+    font-size: 1.05rem;
+    /* Reduced from 1.15rem */
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 2px;
@@ -785,13 +785,16 @@ FLEX CARD GENERATOR - The Core Display
 
 .avatar-img {
     position: absolute;
-    bottom: -20px;
+    bottom: -15px;
+    /* Pull down slightly more to increase space */
     /* Center a 300px wide object perfectly using margin math */
     left: 50%;
-    margin-left: -150px;
+    margin-left: -140px;
+    /* Adjusting based on slightly smaller width */
     /* Sized to fit within card without overflowing */
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    /* Reduced avatar size slightly */
+    height: 280px;
     object-fit: contain;
     object-position: bottom;
     filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.4));
@@ -805,9 +808,11 @@ FLEX CARD GENERATOR - The Core Display
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    margin: 0 12px 14px;
+    margin: 0 10px 10px;
+    /* Tighter margins */
     border-radius: 20px;
-    padding: 14px 12px;
+    padding: 10px 10px;
+    /* Tighter internal padding */
     color: white;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
@@ -826,7 +831,8 @@ FLEX CARD GENERATOR - The Core Display
 
 .ms-val {
     font-family: 'Fredoka', sans-serif;
-    font-size: 1.0rem;
+    font-size: 0.9rem;
+    /* Reduced from 1.0rem */
     font-weight: 700;
     margin-bottom: 2px;
 }
@@ -868,7 +874,8 @@ FLEX CARD GENERATOR - The Core Display
     display: flex;
     justify-content: space-between;
     gap: 6px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    /* Tighter margin */
 }
 
 .ti-pill {
@@ -892,7 +899,8 @@ FLEX CARD GENERATOR - The Core Display
 
 .ti-name {
     font-family: 'Fredoka', sans-serif;
-    font-size: 0.55rem;
+    font-size: 0.5rem;
+    /* Reduced from 0.55rem */
     font-weight: 600;
     color: #e2e8f0;
     /* Brighter name color to contrast with the dark panel */
@@ -909,14 +917,17 @@ FLEX CARD GENERATOR - The Core Display
 }
 
 .badge-pill {
-    padding: 3px 8px;
+    padding: 2px 6px;
+    /* Reduced from 3px 8px */
     border-radius: 100px;
     font-family: 'Fredoka', sans-serif;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
+    /* Reduced from 0.6rem */
     font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
+    /* Reduced gap */
     background: rgba(40, 42, 54, 0.8);
     /* Dark base */
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -1043,6 +1054,8 @@ FLEX CARD GENERATOR - The Core Display
     color: var(--purple);
     transform: scale(1.1);
 }
+
+
 
 /* Theme Picker */
 .theme-section {

@@ -14,14 +14,25 @@ function formatNumber(num) {
     return num.toString();
 }
 
-function calculateTier(value, ageInYears) {
-    if (value > 100000 || ageInYears > 10) return { name: '<span class="tier-icon">👑</span> MYTHIC', class: 'mythic' };
-    if (value > 10000 || ageInYears > 5) return { name: '<span class="tier-icon">⭐</span> LEGENDARY', class: 'legendary' };
-    if (value > 1000 || ageInYears > 2) return { name: '<span class="tier-icon">💎</span> RARE', class: 'rare' };
+function calculateTier(ageInYears, flexScore) {
+    if (flexScore > 85 || ageInYears > 10) return { name: '<span class="tier-icon">👑</span> MYTHIC', class: 'mythic' };
+    if (flexScore > 60 || ageInYears > 5) return { name: '<span class="tier-icon">⭐</span> LEGENDARY', class: 'legendary' };
+    if (flexScore > 30 || ageInYears > 2) return { name: '<span class="tier-icon">💎</span> RARE', class: 'rare' };
     return { name: '<span class="tier-icon">🟢</span> COMMON', class: '' };
 }
 
-// Generate deterministic random numbers based on username string (for private inventory simulation)
+// Convert flex score (0-99) to full star display (1-5 stars)
+function flexToStars(score) {
+    let count;
+    if (score >= 80) count = 5;
+    else if (score >= 65) count = 4;
+    else if (score >= 45) count = 3;
+    else if (score >= 25) count = 2;
+    else count = 1;
+    return '★'.repeat(count) + '☆'.repeat(5 - count);
+}
+
+// Consistent per-user random numbers
 function seededRandom(seedStr) {
     let hash = 0;
     for (let i = 0; i < seedStr.length; i++) {
@@ -73,10 +84,17 @@ async function fetchRobloxData(username) {
             followersCount = followersData.count || 0;
         } catch (e) { console.warn("Could not fetch followers count", e); }
 
-        // 4. Fetch 3D Avatar Image
+        // 4. Fetch Friends Count
+        let friendsCount = 0;
+        try {
+            const friendsRes = await fetch(`${WORKER_URL}proxy?url=${encodeURIComponent('https://friends.roblox.com/v1/users/' + userId + '/friends/count')}`);
+            const friendsData = await friendsRes.json();
+            friendsCount = friendsData.count || 0;
+        } catch (e) { console.warn("Could not fetch friends count", e); }
+
+        // 5. Fetch 3D Avatar Image
         let avatarUrl = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3C/svg%3E";
         try {
-            // Using body shot for the flex card style
             const avatarRes = await fetch(`${WORKER_URL}proxy?url=${encodeURIComponent('https://thumbnails.roblox.com/v1/users/avatar?userIds=' + userId + '&size=352x352&format=Png&isCircular=false')}`);
             const avatarData = await avatarRes.json();
             if (avatarData.data && avatarData.data[0].state === 'Completed') {
@@ -90,6 +108,7 @@ async function fetchRobloxData(username) {
             username: profileData.name,
             joinDate: new Date(profileData.created),
             followersCount: followersCount,
+            friendsCount: friendsCount,
             avatarUrl: avatarUrl
         };
 
@@ -118,23 +137,36 @@ async function generateFlexCard() {
     try {
         const data = await fetchRobloxData(username);
 
-        // Calculate dynamic/simulated values since actual inventory values are private
         const ageInYears = (new Date() - data.joinDate) / (1000 * 60 * 60 * 24 * 365.25);
-
-        // Deterministic simulation based on username
         const randBase = seededRandom(data.username);
 
-        // Stats Simulation - kept reasonable so tiers distribute properly
-        let projectedValue = Math.floor(randBase * 80000) + (ageInYears * 5000);
-        let projectedItems = Math.floor(seededRandom(data.username + "items") * 1500) + 50;
+        // --- FLEX SCORE (based on REAL data, log-scaled for fair distribution) ---
+        // Account Age: 0-30 pts (log scale)
+        const agePts = Math.min(30, Math.floor(Math.log2(ageInYears + 1) * 7));
 
-        // If they are brand new, nerfed stats
-        if (ageInYears < 0.2) {
-            projectedValue = Math.floor(projectedValue * 0.05);
-            projectedItems = Math.floor(projectedItems * 0.1);
-        }
+        // Followers: 0-35 pts (log scale — millions of followers = max)
+        const followerPts = Math.min(35, Math.floor(Math.log10(data.followersCount + 1) * 4.5));
 
-        const tier = calculateTier(projectedValue, ageInYears);
+        // Friends: 0-20 pts (log scale)
+        const friendPts = Math.min(20, Math.floor(Math.log10(data.friendsCount + 1) * 8.5));
+
+        // Small random variance: 0-15 pts
+        const randomPts = Math.floor(randBase * 15);
+
+        // Total: cap at 99
+        let flexScore = Math.min(99, agePts + followerPts + friendPts + randomPts);
+
+        // Age-based minimum floor (badges should match stars)
+        if (ageInYears >= 10 && flexScore < 80) flexScore = 80 + Math.floor(randBase * 5);
+        else if (ageInYears >= 5 && flexScore < 65) flexScore = 65 + Math.floor(randBase * 5);
+        else if (ageInYears >= 2 && flexScore < 45) flexScore = 45 + Math.floor(randBase * 5);
+        else if (ageInYears >= 1 && flexScore < 25) flexScore = 25 + Math.floor(randBase * 5);
+        if (flexScore < 10) flexScore = 10;
+
+        // Drip Level: derived from flex score + age for big impressive number
+        let dripLevel = Math.floor((flexScore * 500) + (ageInYears * 3000) + (data.followersCount * 0.5));
+
+        const tier = calculateTier(ageInYears, flexScore);
 
         // Populate Top Info
         document.getElementById('card-username').textContent = '@' + data.displayName;
@@ -149,48 +181,68 @@ async function generateFlexCard() {
         tierEl.innerHTML = tier.name;
 
         // Populate Stats Panel
-        document.getElementById('stat-value').textContent = '💰 ' + formatNumber(Math.floor(projectedValue));
-        document.getElementById('stat-items').textContent = '🎒 ' + formatNumber(projectedItems);
+        const stars = flexToStars(flexScore);
+        document.getElementById('stat-value').textContent = stars;
+        document.getElementById('stat-items').textContent = '💧 ' + formatNumber(Math.floor(dripLevel));
         document.getElementById('stat-friends').textContent = '👥 ' + formatNumber(data.followersCount);
 
-        // Simulated Rarest Items Pool
-        const rareItemsPool = [
-            "Dominus Infernus", "Valkyrie Helm", "Sparkle Time Fedora", "Korblox Deathspeaker",
-            "Headless Horseman", "Classic Fedora", "Clockwork's Headphones", "Super Super Happy Face",
-            "Redvalk", "Ice Valkyrie", "Dominus Rex", "Dominus Aureus", "Workclock Headphones",
-            "Playful Vampire", "Prankster", "Neon Green Beautiful Hair", "Silver King of the Night"
+        // --- FUN ACHIEVEMENT TITLES (per-user consistent, always unique) ---
+        const achievementPool = [
+            'Certified Drip 💧', 'Built Different 🔥', 'Main Character ✨', 'Boss Mode 👑',
+            'Unstoppable ⚡', 'Vibe Master 🎶', 'Legendary Aura ⭐', 'Diamond Hands 💎',
+            'Style Icon 💅', 'Shadow Lord 🌙', 'Clout King 📸', 'Pixel King 🎮',
+            'Ice Cold ❄️', 'Elite Gamer 🏆', 'Drip God 💧', 'Power Player 💪',
+            'Fan Favorite ❤️', 'Smooth Operator 🕺', 'Night Owl 🦉', 'Rising Star 🌟',
+            'Alpha Wolf 🐺', 'Speed Demon 🏎️', 'Big Brain 🧠', 'Golden Child 🏅',
+            'Crowd Favorite 🎉', 'Top Tier 🔝', 'Pure Fire 🔥', 'Chill Vibes 🌊'
         ];
 
-        // Pick 3 deterministic rare items
-        const item1 = rareItemsPool[Math.floor(seededRandom(data.username + "1") * rareItemsPool.length)];
-        const item2 = rareItemsPool[Math.floor(seededRandom(data.username + "2") * rareItemsPool.length)];
-        const item3 = rareItemsPool[Math.floor(seededRandom(data.username + "3") * rareItemsPool.length)];
+        // Pick 3 unique achievements
+        const pool = [...achievementPool];
+        const picked = [];
+        for (let p = 0; p < 3; p++) {
+            const idx = Math.floor(seededRandom(data.username + 'ach' + p) * pool.length);
+            picked.push(pool[idx]);
+            pool.splice(idx, 1);
+        }
 
-        document.getElementById('item-1').textContent = item1;
-        document.getElementById('item-2').textContent = item2;
-        document.getElementById('item-3').textContent = item3;
+        document.getElementById('item-1').textContent = picked[0];
+        document.getElementById('item-2').textContent = picked[1];
+        document.getElementById('item-3').textContent = picked[2];
 
-        // Populate Mini Badges
+        // --- MINI BADGES (mix of real + fun) ---
         const badgesContainer = document.getElementById('mini-badges');
         badgesContainer.innerHTML = '';
 
+        // Real: based on actual account age
         if (ageInYears >= 5) {
             badgesContainer.innerHTML += `<div class="badge-pill badge-og">⏰ OG Player</div>`;
         } else if (ageInYears >= 2) {
             badgesContainer.innerHTML += `<div class="badge-pill badge-veteran">🏛️ Veteran</div>`;
         }
 
-        if (projectedValue >= 100000) {
-            badgesContainer.innerHTML += `<div class="badge-pill badge-rich">💎 Rich</div>`;
+        // Fun: based on flex score
+        if (flexScore >= 70) {
+            badgesContainer.innerHTML += `<div class="badge-pill badge-rich">💎 Elite</div>`;
+        } else if (flexScore >= 40) {
+            badgesContainer.innerHTML += `<div class="badge-pill badge-rich">🔥 Hot</div>`;
         }
 
-        if (projectedItems >= 1000) {
-            badgesContainer.innerHTML += `<div class="badge-pill badge-collector">🛍️ Collector</div>`;
+        // Fun: based on drip level
+        if (dripLevel >= 50000) {
+            badgesContainer.innerHTML += `<div class="badge-pill badge-collector">💧 Drip Lord</div>`;
         }
 
-        // Add a default badge if empty
+        // Real: based on followers
+        if (data.followersCount >= 1000) {
+            badgesContainer.innerHTML += `<div class="badge-pill badge-collector">🌟 Famous</div>`;
+        } else if (data.followersCount >= 100) {
+            badgesContainer.innerHTML += `<div class="badge-pill badge-collector">🤝 Popular</div>`;
+        }
+
+        // Default badge if none earned
         if (badgesContainer.innerHTML === '') {
-            badgesContainer.innerHTML = `<div class="badge-pill">⭐ Roblex Verified</div>`;
+            badgesContainer.innerHTML = `<div class="badge-pill">⭐ Roblox Player</div>`;
         }
 
         // Show the card section and scroll to it
@@ -252,18 +304,20 @@ function prepareCardForCapture(cardEl) {
         }
     });
 
-    // 3. Make the bottom panel solid dark instead of glassy transparent
+    // 3. Simple Blur Compensation
+    // Since we lose the 16px blur during download, a 0.4 black background looks too light.
+    // Changing it temporarily to 0.75 black gives the same dark visual weight while
+    // still letting the theme color shine through.
     const bottomPanel = cardEl.querySelector('.card-bottom-panel');
     if (bottomPanel) {
         saved.push({ el: bottomPanel, prop: 'background', val: bottomPanel.style.background });
-        bottomPanel.style.background = 'rgba(30, 32, 40, 0.95)';
+        bottomPanel.style.background = 'rgba(0, 0, 0, 0.75)';
     }
 
-    // 4. Make tier chip background slightly more opaque
     const tierChip = cardEl.querySelector('.tier-chip');
     if (tierChip) {
         saved.push({ el: tierChip, prop: 'background', val: tierChip.style.background });
-        tierChip.style.background = 'rgba(255, 255, 255, 0.25)';
+        tierChip.style.background = 'rgba(0, 0, 0, 0.4)';
     }
 
     return saved;
@@ -360,3 +414,4 @@ function shareTo(platform) {
 
     window.open(shareUrl, '_blank');
 }
+
