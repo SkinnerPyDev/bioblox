@@ -1,0 +1,5 @@
+# https://bioblox.fun robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://bioblox.fun/sitemap.xml
