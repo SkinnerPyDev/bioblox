@@ -1525,14 +1525,36 @@ footer a:hover {
     }
 
     .flex-card {
-        transform: scale(0.85);
-        /* Scale down on mobile */
-        transform-origin: top center;
+        transform: none;
+        /* Remove scale — causes download and layout issues */
     }
 
-    .card-outer {
-        margin-bottom: -100px;
-        /* Adjust spacing after scaling */
+    .card-section {
+        padding: 0 10px 20px;
+    }
+
+    .action-buttons {
+        width: 100%;
+        max-width: 290px;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .btn-action {
+        width: 100%;
+        padding: 14px 0;
+        font-size: 0.9rem;
+    }
+
+    .social-share {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px 14px;
+        gap: 8px;
+    }
+
+    .footer-links {
+        justify-content: center;
     }
 }
 

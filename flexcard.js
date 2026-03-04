@@ -362,10 +362,31 @@ function restoreCardAfterCapture(saved) {
 
 function captureCard(cardEl) {
     const saved = prepareCardForCapture(cardEl);
+
+    // Save and reset any CSS transform (mobile scale causes blank space in capture)
+    const origTransform = cardEl.style.transform;
+    const origTransformOrigin = cardEl.style.transformOrigin;
+    cardEl.style.transform = 'none';
+    cardEl.style.transformOrigin = 'top left';
+
     return html2canvas(cardEl, HTML2CANVAS_OPTIONS).then(canvas => {
+        // Restore transform
+        cardEl.style.transform = origTransform;
+        cardEl.style.transformOrigin = origTransformOrigin;
         restoreCardAfterCapture(saved);
-        return canvas;
+
+        // Crop canvas to exact card dimensions (removes any extra space)
+        const cropW = 290 * HTML2CANVAS_OPTIONS.scale;
+        const cropH = 560 * HTML2CANVAS_OPTIONS.scale;
+        const croppedCanvas = document.createElement('canvas');
+        croppedCanvas.width = cropW;
+        croppedCanvas.height = cropH;
+        const ctx = croppedCanvas.getContext('2d');
+        ctx.drawImage(canvas, 0, 0, cropW, cropH, 0, 0, cropW, cropH);
+        return croppedCanvas;
     }).catch(err => {
+        cardEl.style.transform = origTransform;
+        cardEl.style.transformOrigin = origTransformOrigin;
         restoreCardAfterCapture(saved);
         throw err;
     });
