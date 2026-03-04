@@ -315,7 +315,7 @@
             <p>👀 Want to see how it looks on <em>your actual profile?</em></p>
             <div class="preview-username-row">
                 <input type="text" id="inp-roblox-username" placeholder="Enter your Roblox username..."
-                    autocomplete="off">
+                    autocomplete="off" onkeydown="if(event.key==='Enter')loadRealPreview()">
                 <button onclick="loadRealPreview()">🔍 Preview</button>
             </div>
         </div>
