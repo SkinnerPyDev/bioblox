@@ -1,4 +1,3 @@
-# https://bioblox.fun robots.txt
 User-agent: *
 Allow: /
 
