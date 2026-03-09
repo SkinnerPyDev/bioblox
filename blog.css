@@ -543,6 +543,13 @@ footer a:hover {
         display: none;
     }
 
+    .nav-links a {
+        padding: 10px 16px;
+        display: block;
+        width: 100%;
+        border-radius: 12px;
+    }
+
     .mobile-menu {
         display: flex;
     }
