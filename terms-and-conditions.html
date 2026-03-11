@@ -35,84 +35,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="base.css">
     <style>
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --pink: #ff6b9d;
-            --purple: #c084fc;
-            --blue: #60a5fa;
-            --bg: #fef7ff;
-            --text: #3b1f5e;
-            --text-light: #7c6a99;
-            --border: #f0e4f7;
-        }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 32px;
-            background: rgba(255, 255, 255, .85);
-            backdrop-filter: blur(16px);
-            border-bottom: 3px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-family: 'Fredoka', sans-serif;
-            font-weight: 700;
-            font-size: 1.6rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text);
-            text-decoration: none;
-        }
-
-        .logo img {
-            height: 90px;
-            width: auto;
-            object-fit: contain;
-            margin: -20px 0;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 6px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-size: .9rem;
-            font-weight: 600;
-            padding: 8px 18px;
-            border-radius: 100px;
-            transition: all .25s;
-        }
-
-        .nav-links a:hover {
-            color: white;
-            background: linear-gradient(135deg, var(--pink), var(--purple));
-        }
-
         .content {
             max-width: 700px;
             margin: 0 auto;
@@ -153,74 +77,6 @@
             color: var(--text-light);
             margin-bottom: 24px;
         }
-
-        footer {
-            margin-top: auto;
-            padding: 24px 32px;
-            border-top: 3px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: .82rem;
-            color: var(--text-light);
-            background: rgba(255, 255, 255, .7);
-            font-weight: 500;
-        }
-
-        footer a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-weight: 600;
-            transition: color .2s;
-        }
-
-        footer a:hover {
-            color: var(--pink);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-        }
-
-        .mobile-menu span {
-            width: 24px;
-            height: 3px;
-            background: var(--purple);
-            border-radius: 3px;
-        }
-
-        @media(max-width: 640px) {
-            nav {
-                padding: 12px 16px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            footer {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-
-            .footer-links {
-                justify-content: center;
-            }
-        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -234,17 +90,7 @@
 </head>
 
 <body>
-    <nav>
-        <a href="index.html" class="logo">
-            <img src="logo.webp" alt="BioBlox Logo">
-        </a>
-        <ul class="nav-links">
-            <li><a href="index.html">Bio Generator</a></li>
-            <li><a href="flexcard-generator.html">Flex Card</a></li>
-            <li><a href="blog.html">Blog</a></li>
-        </ul>
-        <div class="mobile-menu"><span></span><span></span><span></span></div>
-    </nav>
+    <div id="navbar"></div>
 
     <div class="content">
         <h1>Terms of Service</h1>
@@ -292,22 +138,9 @@
             <a href="contact-us.html">Contact Us</a>
         </div>
     </footer>
-    <script>
-        document.querySelector('.mobile-menu').addEventListener('click', function () {
-            const nav = document.querySelector('.nav-links');
-            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-            nav.style.flexDirection = 'column';
-            nav.style.position = 'absolute';
-            nav.style.top = '100%';
-            nav.style.left = '0';
-            nav.style.right = '0';
-            nav.style.background = 'rgba(255,255,255,0.97)';
-            nav.style.padding = '12px 16px';
-            nav.style.borderBottom = '3px solid var(--border)';
-            nav.style.zIndex = '99';
-            nav.style.gap = '12px';
-        });
-    </script>
+    
+
+    <script src="navbar.js"></script>
 </body>
 
 </html>

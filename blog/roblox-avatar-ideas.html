@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-nav-prefix="../">
 
 <head>
     <meta charset="UTF-8">
@@ -65,6 +65,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="../base.css">
     <link rel="stylesheet" href="../blog.css">
 
     <!-- Google tag (gtag.js) -->
@@ -78,17 +79,7 @@
 </head>
 
 <body>
-    <nav>
-        <a href="../index.html" class="logo">
-            <img src="../logo.webp" alt="BioBlox Logo">
-        </a>
-        <ul class="nav-links">
-            <li><a href="../index.html">Bio Generator</a></li>
-            <li><a href="../flexcard-generator.html">Flex Card</a></li>
-            <li><a href="../blog.html" class="active">Blog</a></li>
-        </ul>
-        <div class="mobile-menu"><span></span><span></span><span></span></div>
-    </nav>
+    <div id="navbar"></div>
 
     <div class="article-wrapper">
         <div class="breadcrumb">
@@ -533,22 +524,7 @@
             <a href="../contact-us.html">Contact Us</a>
         </div>
     </footer>
-    <script>
-        document.querySelector('.mobile-menu').addEventListener('click', function () {
-            const nav = document.querySelector('.nav-links');
-            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-            nav.style.flexDirection = 'column';
-            nav.style.position = 'absolute';
-            nav.style.top = '100%';
-            nav.style.left = '0';
-            nav.style.right = '0';
-            nav.style.background = 'rgba(255,255,255,0.97)';
-            nav.style.padding = '12px 16px';
-            nav.style.borderBottom = '3px solid var(--border)';
-            nav.style.zIndex = '99';
-            nav.style.gap = '12px';
-        });
-    </script>
+    <script src="../navbar.js"></script>
 </body>
 
 </html>

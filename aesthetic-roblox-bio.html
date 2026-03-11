@@ -43,6 +43,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="biogen.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-06P1JHZMME"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-06P1JHZMME');</script>
@@ -57,12 +58,21 @@
         <div class="shape shape-5"></div>
     </div>
     <div class="page-wrapper">
-        <nav>
-            <a href="index.html" class="logo"><img src="logo.webp" alt="BioBlox"
-                    style="height:90px;width:auto;object-fit:contain;margin:-20px 0;"></a>
+                        <nav>
+            <a href="index.html" class="logo">
+                <img src="logo.webp" alt="BioBlox - Free Roblox Bio Ideas Generator"
+                    style="height: 90px; width: auto; object-fit: contain; margin: -20px 0;">
+            </a>
             <ul class="nav-links">
-                <li><a href="index.html">Bio Generator</a></li>
-                <li><a href="flexcard-generator.html">Flex Card Generator</a></li>
+                <li><a href="index.html" class="active">Bio Generator</a></li>
+                <li><a href="flexcard-generator.html">Flex Card</a></li>
+                <li class="nav-dropdown">
+                    <a href="#">Tools ▾</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="roblox-username-generator.html">🎮 Username Generator</a></li>
+                        <li><a href="roblox-font-generator.html">🔤 Font Generator</a></li>
+                    </ul>
+                </li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
             <div class="mobile-menu"><span></span><span></span><span></span></div>
@@ -430,6 +440,8 @@
                     <a href="roblox-bio-for-girls.html">Roblox Bio for Girls</a>
                     <a href="roblox-bio-for-boys.html">Roblox Bio for Boys</a>
                     <a href="roblox-flex-bio.html">Roblox Flex Bio</a>
+                    <a href="roblox-username-generator.html">Roblox Username Generator</a>
+                    <a href="roblox-font-generator.html">Roblox Font Generator</a>
                 </div>
             </div>
         </section>
@@ -442,7 +454,7 @@
     </div>
     <script src="bio-data.js" defer></script>
     <script src="biogen.js" defer></script>
-    <script>document.querySelector('.mobile-menu').addEventListener('click', function () { const nav = document.querySelector('.nav-links'); nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex'; nav.style.flexDirection = 'column'; nav.style.position = 'absolute'; nav.style.top = '100%'; nav.style.left = '0'; nav.style.right = '0'; nav.style.background = 'rgba(255,255,255,0.97)'; nav.style.padding = '12px 16px'; nav.style.borderBottom = '3px solid var(--border)'; nav.style.zIndex = '99'; nav.style.gap = '12px'; });</script>
+    <script src="navbar.js"></script>
 </body>
 
 </html>
