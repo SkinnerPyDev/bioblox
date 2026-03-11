@@ -156,7 +156,7 @@ function applyDecorator(text, decoKey) {
 }
 
 // --- Gender-Priority Bio Pool Builder ---
-function getGenderPriorityPool(gender) {
+function getGenderPriorityPool(gender, game) {
     // Returns bios in priority order: gender-specific first, then neutral, then mixed
     let primary, secondary;
     if (gender === 'f') {
@@ -170,10 +170,19 @@ function getGenderPriorityPool(gender) {
         secondary = [...BIO_LINES.girl, ...BIO_LINES.boy];
     }
     const neutral = [...BIO_LINES.neutral];
+    const gardenBios = BIO_LINES.garden ? [...BIO_LINES.garden] : [];
     shuffle(primary);
     shuffle(neutral);
     shuffle(secondary);
-    return [...primary, ...neutral, ...secondary];
+    shuffle(gardenBios);
+
+    // When Grow a Garden is selected, put garden bios first (highest priority)
+    if (game === 'Grow a Garden') {
+        return [...gardenBios, ...primary, ...neutral, ...secondary];
+    }
+
+    // For other games, mix a few garden bios into the general pool
+    return [...primary, ...neutral, ...gardenBios.slice(0, 10), ...secondary];
 }
 
 function stripEmojis(text) {
@@ -195,8 +204,8 @@ function generateBios() {
     const container = document.getElementById('bio-cards');
     container.innerHTML = '';
 
-    // Build gender-priority bio pool
-    const bioPool = getGenderPriorityPool(gender);
+    // Build gender-priority bio pool (game-aware)
+    const bioPool = getGenderPriorityPool(gender, game);
 
     // Also get style titles and personality quotes for short/long modes
     const titlePool = [...TITLES[style]];
@@ -215,13 +224,18 @@ function generateBios() {
     else metaParts.push('rp lover');
     const meta = metaParts.join(' • ');
 
+    // Garden-specific pool for titles when Grow a Garden is selected
+    const isGarden = game === 'Grow a Garden';
+    const gardenPool = (BIO_LINES.garden || []).slice();
+    shuffle(gardenPool);
+
     for (let i = 0; i < 4; i++) {
         let bioCopyText = '';
         let displayHTML = '';
 
         if (length === 'oneliner') {
             // ONE LINER: bio line + meta info
-            let line = bioPool[i % bioPool.length];
+            let line = isGarden ? gardenPool[i % gardenPool.length] : bioPool[i % bioPool.length];
             if (!useEmoji) line = stripEmojis(line);
             if (decoKey !== 'none') line = applyDecorator(line, decoKey);
 
@@ -232,21 +246,28 @@ function generateBios() {
             `;
 
         } else if (length === 'short') {
-            // SHORT: title + meta + quote + tags (same as old Long)
-            let rawTitle = titlePool[i % titlePool.length];
-            let rawQuote = quotePool[i % quotePool.length];
-            let title = genderize(rawTitle, gender);
-            let quote = '"' + genderize(rawQuote, gender) + '"';
+            // SHORT: title + meta + quote + tags
+            let displayTitle, quote;
+
+            if (isGarden) {
+                // Use garden bios as title and quote
+                displayTitle = gardenPool[i % gardenPool.length];
+                quote = '"' + gardenPool[(i + 4) % gardenPool.length] + '"';
+            } else {
+                let rawTitle = titlePool[i % titlePool.length];
+                let rawQuote = quotePool[i % quotePool.length];
+                displayTitle = genderize(rawTitle, gender);
+                quote = '"' + genderize(rawQuote, gender) + '"';
+                displayTitle = masculinizeEmojis(displayTitle, gender);
+                quote = masculinizeEmojis(quote, gender);
+            }
 
             const rawTagPool = useEmoji ? TAGS[style].e : TAGS[style].n;
             let tagPool = rawTagPool.map(t => genderize(t, gender));
             tagPool = tagPool.map(t => masculinizeEmojis(t, gender));
             const tags = shuffle([...tagPool]).slice(0, 2).join(' • ');
 
-            title = masculinizeEmojis(title, gender);
-            quote = masculinizeEmojis(quote, gender);
-
-            let displayTitle = useEmoji ? title : stripEmojis(title);
+            if (!useEmoji) displayTitle = stripEmojis(displayTitle);
             if (decoKey !== 'none') displayTitle = applyDecorator(displayTitle, decoKey);
 
             bioCopyText = displayTitle + '\n' + meta + '\n' + quote + '\n' + tags;
@@ -258,30 +279,35 @@ function generateBios() {
             `;
 
         } else {
-            // LONG: title + meta + extra bio line + quote + more tags (richer format)
-            let rawTitle = titlePool[i % titlePool.length];
-            let rawQuote = quotePool[i % quotePool.length];
-            let title = genderize(rawTitle, gender);
-            let quote = '"' + genderize(rawQuote, gender) + '"';
+            // LONG: title + meta + extra bio line + quote + quote2 + tags
+            let displayTitle, quote, extraLine, quote2;
 
-            // Extra bio line from gender pool for richness
-            let extraLine = bioPool[i % bioPool.length];
-            if (!useEmoji) extraLine = stripEmojis(extraLine);
-
-            // Get a second quote for extra depth
-            let rawQuote2 = quotePool[(i + 2) % quotePool.length];
-            let quote2 = '"' + genderize(rawQuote2, gender) + '"';
-            quote2 = masculinizeEmojis(quote2, gender);
+            if (isGarden) {
+                // Use garden bios for all content lines
+                displayTitle = gardenPool[i % gardenPool.length];
+                extraLine = gardenPool[(i + 4) % gardenPool.length];
+                quote = '"' + gardenPool[(i + 8) % gardenPool.length] + '"';
+                quote2 = '"' + gardenPool[(i + 12) % gardenPool.length] + '"';
+            } else {
+                let rawTitle = titlePool[i % titlePool.length];
+                let rawQuote = quotePool[i % quotePool.length];
+                displayTitle = genderize(rawTitle, gender);
+                quote = '"' + genderize(rawQuote, gender) + '"';
+                extraLine = bioPool[i % bioPool.length];
+                if (!useEmoji) extraLine = stripEmojis(extraLine);
+                let rawQuote2 = quotePool[(i + 2) % quotePool.length];
+                quote2 = '"' + genderize(rawQuote2, gender) + '"';
+                displayTitle = masculinizeEmojis(displayTitle, gender);
+                quote = masculinizeEmojis(quote, gender);
+                quote2 = masculinizeEmojis(quote2, gender);
+            }
 
             const rawTagPool = useEmoji ? TAGS[style].e : TAGS[style].n;
             let tagPool = rawTagPool.map(t => genderize(t, gender));
             tagPool = tagPool.map(t => masculinizeEmojis(t, gender));
             const tags = shuffle([...tagPool]).slice(0, 3).join(' • ');
 
-            title = masculinizeEmojis(title, gender);
-            quote = masculinizeEmojis(quote, gender);
-
-            let displayTitle = useEmoji ? title : stripEmojis(title);
+            if (!useEmoji) displayTitle = stripEmojis(displayTitle);
             if (decoKey !== 'none') displayTitle = applyDecorator(displayTitle, decoKey);
 
             bioCopyText = displayTitle + '\n' + meta + '\n' + extraLine + '\n' + quote + '\n' + quote2 + '\n' + tags;
