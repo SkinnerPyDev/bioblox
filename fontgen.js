@@ -68,7 +68,12 @@ function convertMap(text, mapLower, mapUpper) {
 }
 
 function addCombining(text, combChar) {
-    return [...text].map(ch => ch + combChar).join('');
+    return [...text].map(ch => {
+        // Skip combining marks for supplementary plane chars (>0xFFFF)
+        // as they fail to render on many mobile devices, showing as boxes
+        if (ch.codePointAt(0) > 0xFFFF) return ch;
+        return ch + combChar;
+    }).join('');
 }
 
 // ---- ALL 150 FONT STYLES ----
