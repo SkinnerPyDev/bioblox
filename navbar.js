@@ -6,20 +6,20 @@
     // Build the navbar HTML
     var navHTML =
         '<nav>' +
-            '<a href="' + prefix + 'index.html" class="logo">' +
+            '<a href="' + prefix + '/" class="logo">' +
                 '<img src="' + prefix + 'logo.webp" alt="BioBlox - Free Roblox Bio Ideas Generator" style="height: 90px; width: auto; object-fit: contain; margin: -20px 0;">' +
             '</a>' +
             '<ul class="nav-links">' +
-                '<li><a href="' + prefix + 'index.html" data-nav="index">Bio Generator</a></li>' +
-                '<li><a href="' + prefix + 'flexcard-generator.html" data-nav="flexcard">Flex Card</a></li>' +
+                '<li><a href="' + prefix + '/" data-nav="index">Bio Generator</a></li>' +
+                '<li><a href="' + prefix + 'flexcard-generator" data-nav="flexcard">Flex Card</a></li>' +
                 '<li class="nav-dropdown" data-nav-dropdown>' +
                     '<a data-nav="tools">Tools ▾</a>' +
                     '<ul class="nav-dropdown-menu">' +
-                        '<li><a href="' + prefix + 'roblox-username-generator.html" data-nav="username">🎮 Username Generator</a></li>' +
-                        '<li><a href="' + prefix + 'roblox-font-generator.html" data-nav="font">✨ Font Generator</a></li>' +
+                        '<li><a href="' + prefix + 'roblox-username-generator" data-nav="username">🎮 Username Generator</a></li>' +
+                        '<li><a href="' + prefix + 'roblox-font-generator" data-nav="font">✨ Font Generator</a></li>' +
                     '</ul>' +
                 '</li>' +
-                '<li><a href="' + prefix + 'blog.html" data-nav="blog">Blog</a></li>' +
+                '<li><a href="' + prefix + 'blog" data-nav="blog">Blog</a></li>' +
             '</ul>' +
             '<div class="mobile-menu"><span></span><span></span><span></span></div>' +
         '</nav>';
@@ -32,14 +32,14 @@
 
     // Determine which nav link should be active
     var path = window.location.pathname.replace(/\\/g, '/');
-    var page = path.split('/').pop() || 'index.html';
+    var page = path.split('/').pop() || '/';
 
     var activeMap = {
-        'index.html': 'index',
-        'flexcard-generator.html': 'flexcard',
-        'roblox-username-generator.html': 'username',
-        'roblox-font-generator.html': 'font',
-        'blog.html': 'blog'
+        '/': 'index',
+        'flexcard-generator': 'flexcard',
+        'roblox-username-generator': 'username',
+        'roblox-font-generator': 'font',
+        'blog': 'blog'
     };
 
     var activeKey = activeMap[page];
