@@ -17,6 +17,7 @@
                     '<ul class="nav-dropdown-menu">' +
                         '<li><a href="' + prefix + 'roblox-username-generator" data-nav="username">🎮 Username Generator</a></li>' +
                         '<li><a href="' + prefix + 'roblox-font-generator" data-nav="font">✨ Font Generator</a></li>' +
+                        '<li><a href="' + prefix + 'roblox-profile-viewer" data-nav="profileviewer">🔍 Profile Viewer</a></li>' +
                     '</ul>' +
                 '</li>' +
                 '<li><a href="' + prefix + 'blog" data-nav="blog">Blog</a></li>' +
@@ -39,6 +40,7 @@
         'flexcard-generator': 'flexcard',
         'roblox-username-generator': 'username',
         'roblox-font-generator': 'font',
+        'roblox-profile-viewer': 'profileviewer',
         'blog': 'blog'
     };
 
@@ -55,7 +57,7 @@
             activeLink.classList.add('active');
         }
         // If a tool sub-page is active, also highlight the Tools parent
-        if (activeKey === 'username' || activeKey === 'font') {
+        if (activeKey === 'username' || activeKey === 'font' || activeKey === 'profileviewer') {
             var toolsLink = document.querySelector('[data-nav="tools"]');
             if (toolsLink) toolsLink.classList.add('active');
         }
