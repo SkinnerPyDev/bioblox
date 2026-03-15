@@ -7,6 +7,25 @@ const WORKER_URL = 'https://robox.skinnerdev.workers.dev/';
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; }
 
+// --- Used bio tracker to prevent repeats ---
+let usedBios = new Set();
+let usedTitles = new Set();
+let usedQuotes = new Set();
+
+function pickUnused(arr, usedSet) {
+    // Filter out already used items
+    let available = arr.filter(item => !usedSet.has(item));
+    // Reset if pool is running low (less than 10% left)
+    if (available.length < Math.max(4, arr.length * 0.1)) {
+        usedSet.clear();
+        available = [...arr];
+    }
+    shuffle(available);
+    const picked = available[0];
+    if (picked) usedSet.add(picked);
+    return picked;
+}
+
 function pickPronoun(btn) {
     document.querySelectorAll('.pronoun-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -90,6 +109,7 @@ function masculinizeEmojis(text, g) {
 }
 
 const TITLES = {
+    Neutral: ["just a {child} with a bio", "profile check ✓", "{boi} with a story", "the usual {child}", "here we go again", "just me", "nothing fancy, just real", "average {child}, above average vibes", "another day, another bio", "{boi} of many moods", "this is my profile now", "the {child} next door", "idk what to put here", "default {child}", "just existing", "vibes pending...", "{boi} version 2.0", "still loading", "somewhere between cool and confused", "bio under construction"],
     Cute: ["꒰ 🌸 ꒱ soft {child} era ˚₊·", "♡ cute {boi} ♡", "🌷 quiet cutie 🌷", "˚₊· flower {child} ·₊˚", "🎀 too shy to say hi 🎀", "💕 lil {prince} 💕", "🌸 sweet like honey 🌸", "♡₊˚ precious {child} ₊˚♡", "🎀 cotton candy dreams 🎀", "🌷 {prince} of softness 🌷", "✨ cute & i know it ✨", "💗 baby face {royal} 💗", "🌸 sugar plum {child} 🌸", "♡ soft era activated ♡", "🎀 certified cutie 🎀", "🌷 angel {child} 🌷", "💕 sweetest {boi} alive 💕", "✨ kawaii {child} ✨", "🌸 bubblegum {prince} 🌸", "♡ strawberry milk vibes ♡"],
     Emo: ["⛓️ broken {child} ⛓️", "🖤 don't talk to me 🖤", "💀 {prince} of darkness 💀", "🥀 fading away 🥀", "⛓️ shadow {child} ⛓️", "🖤 dead inside ☠️", "💀 chaos {royal} 💀", "🥀 pain is my aesthetic 🥀", "⛓️ lost soul ⛓️", "🖤 catch these hands 🖤", "💀 savage mode: ON 💀", "🥀 too cold for you 🥀", "⛓️ dark {prince} ⛓️", "🖤 emotionally unavailable 🖤", "💀 {child} of the void 💀", "🥀 broken crayons 🥀", "⛓️ midnight {royal} ⛓️", "🖤 screaming silently 🖤", "💀 emo {boi} energy 💀", "🥀 wilted rose 🥀"],
     Anime: ["♡₊˚ anime {child} ₊˚♡", "🌸 shy weeb ₊˚", "✧ uwu energy ✧", "🎀 baka {dude} 🎀", "⚔️ anime villain arc ⚔️", "🔥 main character energy 🔥", "💥 plus ultra! 💥", "⚡ {hero} arc ⚡", "🌸 kawaii desu~ 🌸", "♡ neko {child} ♡", "🗡️ final boss form 🗡️", "✧ senpai noticed me ✧", "🎀 slice of life {hero} 🎀", "💜 dark side protagonist 💜", "⚡ hidden power unlocked ⚡", "🌙 lone wolf ✧", "🌸 anime {prince} 🌸", "⚔️ {Royal} of the arena ⚔️", "♡ otaku {boi} ♡", "✧ chosen one ✧"],
@@ -103,6 +123,7 @@ const TITLES = {
 };
 
 const QUOTES = {
+    Neutral: ["it is what it is", "not perfect but genuine", "keeping it real since day one", "i don't need a label", "somewhere between chill and chaos", "just doing my thing", "no filter, no fakeness", "take it or leave it", "normal is boring anyway", "works in progress are still art", "quietly figuring things out", "not everyone needs to get me", "still deciding who i wanna be", "the bio doesn't define me", "here for a good time, not a long time", "low maintenance, high standards", "go with whatever happens", "nothing to prove, just living", "i'm me and that's enough", "vibes over everything honestly", "depends on the day really", "not trying, just being", "regular player with irregular timing", "figuring it out as i go", "mind your business and i'll mind mine", "still buffering", "i show up and that's enough", "no script, just me", "the casual player you keep running into", "default settings never changed", "existing without a plan", "plot twist: there is no plot", "my personality changes with the playlist", "just a profile you scrolled past", "idk either honestly", "too real for a bio", "still here for some reason", "logging in, clocking out", "half asleep, fully committed", "i don't take sides, i take naps", "the one who shows up late but shows up", "placeholder personality", "not the best, not the worst, just here", "the quiet one at the back of the lobby", "my bio is shorter than my patience", "i am what i am", "just passing through", "not deep, just honest", "what you see is what you get", "keep scrolling or stop and say hi"],
     Shy: ["not looking for drama, just peace", "shy doesn't mean weak", "quietly living my best life", "too shy to start convos but friendly i promise", "i don't bite... usually", "silence is my superpower", "the quiet ones notice everything", "small talk scares me more than horror games", "i'm nice once you get to know me", "sorry if i seem quiet, i'm just overthinking", "my chat game is weak but my heart is strong", "i watch from a distance, it's safer that way", "introvert with a big heart", "i said hi once, that's my social limit for the week", "i'm shy but i'll protect my friends with my life", "soft voice, loud thoughts", "nervous but here", "i promise i'm cool once i open up", "behind every shy {child} is a wild mind", "please don't put me on the spot", "i blush at everything", "i'm an open book... that's glued shut", "my comfort zone is very small and very cozy", "the wallflower era", "silently judging but in a nice way", "i smile more than i talk", "i'll wave but probably won't say hi", "shy {child} with a secret fun side", "don't mistake my silence for weakness", "i'm just a lil anxious", "observing from the corner", "i wrote this bio instead of talking to people", "text me, don't call", "shy but make it adorable", "social battery: 2%", "i peak in small groups", "awkwardly existing", "quietly iconic", "i stare at the floor a lot but i'm cool", "i'll laugh at your jokes from across the room", "i don't ghost, i'm just scared to reply", "shy {boi} loading...", "my personality unlocks after friendship level 5", "too shy to order food, too bold to let anyone disrespect me", "i rehearse conversations in my head", "the less i talk the more interesting i am", "i'm friendly once you befriend me first", "existing quietly and that's okay", "introverted but loyal", "don't worry, i'm just thinking"],
     Savage: ["sweet face but i bite", "cute outside, savage inside", "underestimate me, that'll be fun", "sweet until you cross me", "i didn't come to play, i came to slay", "built different, no apologies", "if you can't handle me at my worst, good riddance", "i'm the main character and you're an extra", "talk behind my back because you can't face me", "i ate and left no crumbs", "be careful, this {child} plays to win", "too real for fake people", "my attitude is based on how you treat me", "i'm not rude, i'm honest - you're just sensitive", "legends don't compete, they dominate", "i don't chase anymore, i attract", "the audacity? couldn't be me", "sorry not sorry", "catch me if you can, {dude}", "crossed me once? no second chances", "if you're looking for nice, wrong profile", "karma's lazy so i handle it myself", "unbothered, moisturized, in my lane", "i don't start drama, i finish it", "this is not a democracy, it's a monarchy and i'm {royal}", "sit down, the {royal} is speaking", "confidence isn't arrogance, it's self-awareness", "i'm the plot twist they didn't see coming", "my energy is not free - earn it", "be the villain of their story, it means you won", "too busy winning to worry about haters", "the {royal} doesn't beg", "i shine so bright even the sun squints", "don't follow me, you won't make it", "you either love me or pretend you don't", "i didn't choose savage life, it chose me", "built to lead, not to follow", "i don't explain myself to people who don't matter", "i'm the exception to every rule", "they tried to bury me but forgot i'm a seed", "level up or stay down, your choice", "read the room - i am the room", "this {child} doesn't lose, i just learn new ways to win", "jealousy is a disease, get well soon", "i'm not competition, i'm the whole category", "soft heart, savage mind", "the lion doesn't concern itself with the opinion of sheep", "i came, i saw, i conquered - next?", "don't get it twisted, kindness isn't weakness", "your opinion of me is none of my business"],
     Soft: ["kindness is free, spread it", "soft hearts are brave hearts", "be the reason someone smiles today", "love you all 💗", "gentle soul in a chaotic world", "soft but never weak", "spreading love wherever i go", "my heart is my strength", "everyone deserves a second chance", "sending virtual hugs", "the world needs more kindness", "treat people how you want to be treated", "soft {child}, strong spirit", "i believe in the good in people", "empathy is my superpower", "my love language is quality time", "healing others heals me too", "cozy vibes and warm hearts", "life's too short to be mean", "sunshine mixed with a little rain", "i cry at movies and i'm proud of it", "soft doesn't mean pushover", "caring is cool, actually", "the world is heavy, be someone's rest", "protect soft hearts at all costs", "i'd rather be kind than right", "every {child} deserves love", "wholesome energy only", "sensitive and proud of it", "my friends are my treasure", "hugs heal more than words", "i'll be your safe space", "tears are just feelings overflowing", "born to love, built to care", "find beauty in the small things", "the softest {child} in the lobby", "love wins always", "coffee, blankets, and good company", "quiet love is the loudest", "i root for everyone", "your worth isn't measured by likes", "it's okay to not be okay", "rest is productive too", "healing at my own pace", "i choose peace over pride every time", "blooming slowly is still blooming", "soft era unlocked", "i lead with my heart", "love is the answer to everything", "let's be friends, the world needs more of those"],
@@ -116,6 +137,7 @@ const QUOTES = {
 };
 
 const TAGS = {
+    Neutral: { e: ["chill 🎯", "no drama ✌️", "rp open 🎮", "dm me 📩", "just vibing 🎶", "friend me 🤝", "add me ➕", "casual player 🎲", "say hi 👋", "online now 🟢"], n: ["chill", "no drama", "rp open", "dm me", "just vibing", "friend me", "add me", "casual player", "say hi", "online now"] },
     Cute: { e: ["dm for rp ✨", "no toxic 🌷", "rp open 🌸", "be nice 💗", "friend me 🎀", "kind vibes only 🌈", "sweet {child} 🍬", "luv u 💕", "soft era 🧸", "add me 💌"], n: ["dm for rp", "no toxic", "rp open", "be nice", "friend me", "kind vibes only", "stay sweet", "luv u", "soft era", "add me"] },
     Emo: { e: ["stay away 💀", "don't message 🖤", "rp maybe ⛓️", "loner vibes 🥀", "music lover 🎵", "edgy ✖️", "pain is art 🩸", "scream into void 🌑", "dark soul ☠️", "broken 🥀"], n: ["stay away", "don't message", "rp maybe", "loner vibes", "music lover", "edgy", "pain is art", "scream into void", "dark soul", "broken"] },
     Anime: { e: ["anime rp 🌸", "weeb life ✧", "dm for anime talk 🎀", "cosplay fan 🗡️", "manga reader 📖", "otaku 🎌", "neko vibes 🐱", "senpai notice me ✨", "anime lover 💜", "kawaii 🌙"], n: ["anime rp", "weeb life", "dm for anime talk", "cosplay fan", "manga reader", "otaku", "neko vibes", "senpai notice me", "anime lover", "kawaii"] },
@@ -235,7 +257,7 @@ function generateBios() {
 
         if (length === 'oneliner') {
             // ONE LINER: bio line + meta info
-            let line = isGarden ? gardenPool[i % gardenPool.length] : bioPool[i % bioPool.length];
+            let line = isGarden ? pickUnused(gardenPool, usedBios) : pickUnused(bioPool, usedBios);
             if (!useEmoji) line = stripEmojis(line);
             if (decoKey !== 'none') line = applyDecorator(line, decoKey);
 
@@ -251,11 +273,11 @@ function generateBios() {
 
             if (isGarden) {
                 // Use garden bios as title and quote
-                displayTitle = gardenPool[i % gardenPool.length];
-                quote = '"' + gardenPool[(i + 4) % gardenPool.length] + '"';
+                displayTitle = pickUnused(gardenPool, usedTitles);
+                quote = '"' + pickUnused(gardenPool, usedQuotes) + '"';
             } else {
-                let rawTitle = titlePool[i % titlePool.length];
-                let rawQuote = quotePool[i % quotePool.length];
+                let rawTitle = pickUnused(titlePool, usedTitles);
+                let rawQuote = pickUnused(quotePool, usedQuotes);
                 displayTitle = genderize(rawTitle, gender);
                 quote = '"' + genderize(rawQuote, gender) + '"';
                 displayTitle = masculinizeEmojis(displayTitle, gender);
@@ -284,18 +306,18 @@ function generateBios() {
 
             if (isGarden) {
                 // Use garden bios for all content lines
-                displayTitle = gardenPool[i % gardenPool.length];
-                extraLine = gardenPool[(i + 4) % gardenPool.length];
-                quote = '"' + gardenPool[(i + 8) % gardenPool.length] + '"';
-                quote2 = '"' + gardenPool[(i + 12) % gardenPool.length] + '"';
+                displayTitle = pickUnused(gardenPool, usedTitles);
+                extraLine = pickUnused(gardenPool, usedBios);
+                quote = '"' + pickUnused(gardenPool, usedQuotes) + '"';
+                quote2 = '"' + pickUnused(gardenPool, usedQuotes) + '"';
             } else {
-                let rawTitle = titlePool[i % titlePool.length];
-                let rawQuote = quotePool[i % quotePool.length];
+                let rawTitle = pickUnused(titlePool, usedTitles);
+                let rawQuote = pickUnused(quotePool, usedQuotes);
                 displayTitle = genderize(rawTitle, gender);
                 quote = '"' + genderize(rawQuote, gender) + '"';
-                extraLine = bioPool[i % bioPool.length];
+                extraLine = pickUnused(bioPool, usedBios);
                 if (!useEmoji) extraLine = stripEmojis(extraLine);
-                let rawQuote2 = quotePool[(i + 2) % quotePool.length];
+                let rawQuote2 = pickUnused(quotePool, usedQuotes);
                 quote2 = '"' + genderize(rawQuote2, gender) + '"';
                 displayTitle = masculinizeEmojis(displayTitle, gender);
                 quote = masculinizeEmojis(quote, gender);

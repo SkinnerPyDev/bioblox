@@ -58,25 +58,7 @@
         <div class="shape shape-5"></div>
     </div>
     <div class="page-wrapper">
-                        <nav>
-            <a href="/" class="logo">
-                <img src="logo.webp" alt="BioBlox - Free Roblox Bio Ideas Generator"
-                    style="height: 90px; width: auto; object-fit: contain; margin: -20px 0;">
-            </a>
-            <ul class="nav-links">
-                <li><a href="/" class="active">Bio Generator</a></li>
-                <li><a href="flexcard-generator">Flex Card</a></li>
-                <li class="nav-dropdown">
-                    <a href="#">Tools ▾</a>
-                    <ul class="nav-dropdown-menu">
-                        <li><a href="roblox-username-generator">🎮 Username Generator</a></li>
-                        <li><a href="roblox-font-generator">🔤 Font Generator</a></li>
-                    </ul>
-                </li>
-                <li><a href="blog">Blog</a></li>
-            </ul>
-            <div class="mobile-menu"><span></span><span></span><span></span></div>
-        </nav>
+        <div id="navbar"></div>
 
         <section class="hero">
             <h1>Roblox Bio for Girls</h1>
@@ -88,7 +70,8 @@
             <div class="form-card">
                 <div class="dropdowns-row">
                     <div class="select-group"><label>🎨 Style</label><select id="sel-style">
-                            <option selected>Cute</option>
+                            <option selected>Neutral</option>
+                            <option>Cute</option>
                             <option>Emo</option>
                             <option>Anime</option>
                             <option>Aesthetic</option>
@@ -100,9 +83,10 @@
                             <option>Baddie</option>
                         </select></div>
                     <div class="select-group"><label>💀 Personality</label><select id="sel-personality">
+                            <option selected>Neutral</option>
                             <option>Shy</option>
                             <option>Savage</option>
-                            <option selected>Soft</option>
+                            <option>Soft</option>
                             <option>Mysterious</option>
                             <option>Chill</option>
                             <option>Funny</option>
@@ -123,7 +107,7 @@
                             <option>Livetopia</option>
                             <option>Greenville</option>
                             <option>Murder Mystery 2</option>
-                            <option>Any RP Game</option>
+                            <option selected>Any RP Game</option>
                         </select></div>
                 </div>
                 <div class="inputs-grid">
@@ -150,7 +134,7 @@
                                     class="length-icon">📜</span> Long</button></div>
                     </div>
                     <div class="checkbox-item checked" id="chk-emoji" onclick="this.classList.toggle('checked')"><span
-                            class="checkbox-box"></span>Add emojis ✨</div>
+                            class="checkbox-box"></span>Add emojis 🎨</div>
                 </div>
                 <div class="decorator-section"><label class="decorator-label">✦ Border Style</label>
                     <div class="decorator-options" id="decorator-options"><button class="deco-btn active"
@@ -166,8 +150,8 @@
         </section>
 
         <div class="generate-section"><button class="btn-generate" onclick="generateBios()"><span
-                    class="bounce">✨</span> GENERATE MY BIO <span class="bounce">✨</span></button></div>
-        <div class="fun-divider"><span>⭐ 🌈 ⭐</span></div>
+                    class="bounce">✨</span> GENERATE MY BIO <span class="bounce">🎯</span></button></div>
+        <div class="fun-divider"><span></span></div>
 
         <section class="results-section" id="results-section" style="display:none;">
             <div class="results-header"><span class="emoji">📋</span> Your Generated Bios</div>
@@ -183,7 +167,7 @@
                     Preview</button></div>
         </div>
         <section class="preview-section" id="preview-section" style="display:none;">
-            <div class="fun-divider"><span>👀 🎮 👀</span></div>
+            <div class="fun-divider"><span></span></div>
             <div class="preview-header"><span class="emoji">📱</span> Roblox Profile Preview</div>
             <div class="roblox-preview-card">
                 <div class="roblox-avatar-area">
@@ -205,9 +189,9 @@
         </section>
 
         <section class="about-section">
-            <div class="fun-divider"><span>💡 ✨ 💡</span></div>
+            <div class="fun-divider"><span></span></div>
             <div class="about-card">
-                <h2>💖 What Makes a Good Roblox Bio for Girls?</h2>
+                <h2>What Makes a Good Roblox Bio for Girls?</h2>
                 <p>A great Roblox bio for girls reflects your personality and style. Whether you prefer cute, aesthetic,
                     baddie, or preppy vibes, the right bio makes your profile shine and helps you connect with
                     like-minded players.</p>
@@ -216,7 +200,7 @@
                         <p>Your bio should match your avatar and vibe. Cute outfits go with cute bios. Baddie fits
                             deserve a baddie bio.</p>
                     </div>
-                    <div class="about-feature"><span class="about-icon">✨</span><strong>Add Decorations</strong>
+                    <div class="about-feature"><span class="about-icon">💫</span><strong>Add Decorations</strong>
                         <p>Use emojis, hearts, and decorative borders to make your bio look polished and unique.</p>
                     </div>
                     <div class="about-feature"><span class="about-icon">💬</span><strong>Show Personality</strong>
@@ -233,10 +217,10 @@
 
         <section class="about-section">
             <div class="about-card">
-                <h2>🌸 Roblox Bios for Girls You Can Copy</h2>
+                <h2>Roblox Bios for Girls You Can Copy</h2>
                 <p>Browse these curated Roblox bio ideas for girls and copy your favorite!</p>
 
-                <h3>💗 Cute and Sweet Bios</h3>
+                <h3>Cute and Sweet Bios</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>sweet like honey, soft like clouds 🍯</p>
@@ -245,19 +229,10 @@
                         <p>sending virtual hugs to everyone 🤗</p>
                     </div>
                     <div class="about-feature">
-                        <p>collecting hearts and good vibes 💕</p>
-                    </div>
-                    <div class="about-feature">
-                        <p>be kind, be you, be awesome 🌟</p>
-                    </div>
-                    <div class="about-feature">
                         <p>just a little bean trying my best 🫘</p>
                     </div>
                     <div class="about-feature">
                         <p>friendly player looking for RP friends 💗</p>
-                    </div>
-                    <div class="about-feature">
-                        <p>spreading sparkles wherever I go ✨</p>
                     </div>
                     <div class="about-feature">
                         <p>your new favorite Roblox bestie 🥰</p>
@@ -270,7 +245,7 @@
                     </div>
                 </div>
 
-                <h3>🦋 Aesthetic and Dreamy Bios</h3>
+                <h3>Aesthetic and Dreamy Bios</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>✧˚ · dreaming in pastels ·˚✧</p>
@@ -297,14 +272,11 @@
                         <p>chasing sunsets, collecting memories 🌻</p>
                     </div>
                     <div class="about-feature">
-                        <p>made of stardust and good vibes ✨</p>
-                    </div>
-                    <div class="about-feature">
                         <p>gentle breeze, quiet soul, warm heart 🍃</p>
                     </div>
                 </div>
 
-                <h3>👑 Baddie and Confident Bios</h3>
+                <h3>Baddie and Confident Bios</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>queen energy only 👑</p>
@@ -325,10 +297,7 @@
                         <p>not your average player 🔥</p>
                     </div>
                     <div class="about-feature">
-                        <p>born to stand out, not fit in ✨</p>
-                    </div>
-                    <div class="about-feature">
-                        <p>main character energy activated 💫</p>
+                        <p>born to stand out, not fit in</p>
                     </div>
                     <div class="about-feature">
                         <p>sweet face, savage mind 😈</p>
@@ -338,7 +307,7 @@
                     </div>
                 </div>
 
-                <h3>🎀 Preppy and Fun Bios</h3>
+                <h3>Preppy and Fun Bios</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>pink everything, no exceptions 💗</p>
@@ -375,7 +344,7 @@
         </section>
 
         <section class="faq-section">
-            <div class="fun-divider"><span>❓ 💬 ❓</span></div>
+            <div class="fun-divider"><span></span></div>
             <h2 class="faq-title">Frequently Asked Questions About Roblox Bios for Girls</h2>
             <div class="faq-list">
                 <div class="faq-item" onclick="this.classList.toggle('open')">
@@ -427,7 +396,7 @@
 
         <footer>
             <span>&copy; 2026 bioblox.fun</span>
-            <div class="footer-links"><a href="terms-and-conditions">Terms of Service</a><a
+            <div class="footer-links"><a href="about-us">About Us</a><a href="terms-and-conditions">Terms of Service</a><a
                     href="privacy-policy">Privacy Policy</a><a href="contact-us">Contact Us</a></div>
         </footer>
     </div>

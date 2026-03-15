@@ -58,25 +58,7 @@
         <div class="shape shape-5"></div>
     </div>
     <div class="page-wrapper">
-                        <nav>
-            <a href="/" class="logo">
-                <img src="logo.webp" alt="BioBlox - Free Roblox Bio Ideas Generator"
-                    style="height: 90px; width: auto; object-fit: contain; margin: -20px 0;">
-            </a>
-            <ul class="nav-links">
-                <li><a href="/" class="active">Bio Generator</a></li>
-                <li><a href="flexcard-generator">Flex Card</a></li>
-                <li class="nav-dropdown">
-                    <a href="#">Tools ▾</a>
-                    <ul class="nav-dropdown-menu">
-                        <li><a href="roblox-username-generator">🎮 Username Generator</a></li>
-                        <li><a href="roblox-font-generator">🔤 Font Generator</a></li>
-                    </ul>
-                </li>
-                <li><a href="blog">Blog</a></li>
-            </ul>
-            <div class="mobile-menu"><span></span><span></span><span></span></div>
-        </nav>
+        <div id="navbar"></div>
 
         <section class="hero">
             <h1>Funny Roblox Bio</h1>
@@ -88,6 +70,7 @@
             <div class="form-card">
                 <div class="dropdowns-row">
                     <div class="select-group"><label>🎨 Style</label><select id="sel-style">
+                            <option selected>Neutral</option>
                             <option>Cute</option>
                             <option>Emo</option>
                             <option>Anime</option>
@@ -123,7 +106,7 @@
                             <option>Livetopia</option>
                             <option>Greenville</option>
                             <option>Murder Mystery 2</option>
-                            <option>Any RP Game</option>
+                            <option selected>Any RP Game</option>
                         </select></div>
                 </div>
                 <div class="inputs-grid">
@@ -150,7 +133,7 @@
                                     class="length-icon">📜</span> Long</button></div>
                     </div>
                     <div class="checkbox-item checked" id="chk-emoji" onclick="this.classList.toggle('checked')"><span
-                            class="checkbox-box"></span>Add emojis ✨</div>
+                            class="checkbox-box"></span>Add emojis 🎨</div>
                 </div>
                 <div class="decorator-section"><label class="decorator-label">✦ Border Style</label>
                     <div class="decorator-options" id="decorator-options"><button class="deco-btn active"
@@ -166,8 +149,8 @@
         </section>
 
         <div class="generate-section"><button class="btn-generate" onclick="generateBios()"><span
-                    class="bounce">✨</span> GENERATE MY BIO <span class="bounce">✨</span></button></div>
-        <div class="fun-divider"><span>⭐ 🌈 ⭐</span></div>
+                    class="bounce">✨</span> GENERATE MY BIO <span class="bounce">🎯</span></button></div>
+        <div class="fun-divider"><span></span></div>
 
         <section class="results-section" id="results-section" style="display:none;">
             <div class="results-header"><span class="emoji">📋</span> Your Generated Bios</div>
@@ -183,7 +166,7 @@
                     Preview</button></div>
         </div>
         <section class="preview-section" id="preview-section" style="display:none;">
-            <div class="fun-divider"><span>👀 🎮 👀</span></div>
+            <div class="fun-divider"><span></span></div>
             <div class="preview-header"><span class="emoji">📱</span> Roblox Profile Preview</div>
             <div class="roblox-preview-card">
                 <div class="roblox-avatar-area">
@@ -205,9 +188,9 @@
         </section>
 
         <section class="about-section">
-            <div class="fun-divider"><span>💡 ✨ 💡</span></div>
+            <div class="fun-divider"><span></span></div>
             <div class="about-card">
-                <h2>😂 Why Use a Funny Roblox Bio?</h2>
+                <h2>Why Use a Funny Roblox Bio?</h2>
                 <p>A funny Roblox bio makes your profile instantly memorable. While most players leave their bio blank
                     or write something generic, a hilarious bio shows personality and makes people want to be your
                     friend.</p>
@@ -233,10 +216,10 @@
 
         <section class="about-section">
             <div class="about-card">
-                <h2>🤣 Funny Roblox Bios You Can Copy</h2>
+                <h2>Funny Roblox Bios You Can Copy</h2>
                 <p>Here are the funniest Roblox bio ideas you can copy and paste right now!</p>
 
-                <h3>💀 Self-Deprecating Humor</h3>
+                <h3>Self-Deprecating Humor</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>I came, I saw, I forgot what I was doing 💀</p>
@@ -270,7 +253,7 @@
                     </div>
                 </div>
 
-                <h3>🎮 Gaming Humor</h3>
+                <h3>Gaming Humor</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>building in Bloxburg instead of doing homework 🏠</p>
@@ -304,7 +287,7 @@
                     </div>
                 </div>
 
-                <h3>🤪 Absurd and Random Humor</h3>
+                <h3>Absurd and Random Humor</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>if you can read this, you are too close to my profile 👀</p>
@@ -338,7 +321,7 @@
                     </div>
                 </div>
 
-                <h3>😏 Sarcastic Bios</h3>
+                <h3>Sarcastic Bios</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>sarcasm is my love language 💕</p>
@@ -376,18 +359,18 @@
 
         <section class="about-section">
             <div class="about-card">
-                <h2>💡 Tips for Writing a Funny Roblox Bio</h2>
+                <h2>Tips for Writing a Funny Roblox Bio</h2>
                 <div class="about-features">
-                    <div class="about-feature"><span class="about-icon">1️⃣</span><strong>Keep It Short</strong>
+                    <div class="about-feature"><span class="about-icon">1</span><strong>Keep It Short</strong>
                         <p>The best jokes are one-liners. Long bios lose the punchline.</p>
                     </div>
-                    <div class="about-feature"><span class="about-icon">2️⃣</span><strong>Be Relatable</strong>
+                    <div class="about-feature"><span class="about-icon">2</span><strong>Be Relatable</strong>
                         <p>Humor works best when people can relate to it. Gaming jokes hit different.</p>
                     </div>
-                    <div class="about-feature"><span class="about-icon">3️⃣</span><strong>Stay Original</strong>
+                    <div class="about-feature"><span class="about-icon">3</span><strong>Stay Original</strong>
                         <p>Avoid overused jokes. The funniest bios feel fresh and surprising.</p>
                     </div>
-                    <div class="about-feature"><span class="about-icon">4️⃣</span><strong>Know Your Audience</strong>
+                    <div class="about-feature"><span class="about-icon">4</span><strong>Know Your Audience</strong>
                         <p>Sarcasm works for some, absurd humor for others. Match your style to your vibe.</p>
                     </div>
                 </div>
@@ -395,7 +378,7 @@
         </section>
 
         <section class="faq-section">
-            <div class="fun-divider"><span>❓ 💬 ❓</span></div>
+            <div class="fun-divider"><span></span></div>
             <h2 class="faq-title">Frequently Asked Questions About Funny Roblox Bios</h2>
             <div class="faq-list">
                 <div class="faq-item" onclick="this.classList.toggle('open')">
@@ -446,7 +429,7 @@
 
         <footer>
             <span>&copy; 2026 bioblox.fun</span>
-            <div class="footer-links"><a href="terms-and-conditions">Terms of Service</a><a
+            <div class="footer-links"><a href="about-us">About Us</a><a href="terms-and-conditions">Terms of Service</a><a
                     href="privacy-policy">Privacy Policy</a><a href="contact-us">Contact Us</a></div>
         </footer>
     </div>

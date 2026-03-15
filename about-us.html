@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="Ae-PamB4NN9znLACgH-TtILVJ7FdRNn4zBWkFxmAO_k" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - BioBlox | The Story Behind the Roblox Bio Generator</title>
+    <meta name="description"
+        content="Learn about BioBlox, the fan-made Roblox bio generator built by Skinner. Discover how a Roblox player built the most popular free bio tool for the community.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Skinner">
+    <meta name="theme-color" content="#fef7ff">
+    <link rel="canonical" href="https://bioblox.fun/about-us">
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bioblox.fun/about-us">
+    <meta property="og:title" content="About Us - BioBlox | The Story Behind the Roblox Bio Generator">
+    <meta property="og:description"
+        content="Learn about BioBlox, the fan-made Roblox bio generator built by Skinner. Discover how a Roblox player built the most popular free bio tool for the community.">
+    <meta property="og:image" content="https://bioblox.fun/og.png">
+    <meta property="og:site_name" content="BioBlox">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@bioblox_fun">
+    <meta name="twitter:title" content="About Us - BioBlox">
+    <meta name="twitter:description"
+        content="Learn about BioBlox, the fan-made Roblox bio generator built by a Roblox player for the community.">
+    <meta name="twitter:image" content="https://bioblox.fun/og.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="base.css">
+    <style>
+        .content {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 48px 24px 60px;
+        }
+
+        .content h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content>p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: .95rem;
+        }
+
+        .about-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .about-card h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .about-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: .93rem;
+            margin-bottom: 12px;
+        }
+
+        .about-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all .25s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(192, 132, 252, .15);
+            border-color: var(--purple);
+        }
+
+        .stat-number {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: .82rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .tools-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .tool-item {
+            background: var(--bg);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: .9rem;
+            color: var(--text);
+            font-weight: 500;
+            transition: all .2s;
+        }
+
+        .tool-item:hover {
+            border-color: var(--purple);
+            background: white;
+        }
+
+        .tool-item a {
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            background: var(--bg);
+            border: 1.5px solid var(--border);
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .88rem;
+            transition: all .2s;
+        }
+
+        .social-link:hover {
+            border-color: var(--purple);
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(192, 132, 252, .15);
+        }
+    </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-06P1JHZMME"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-06P1JHZMME');
+    </script>
+</head>
+
+<body>
+    <div id="navbar"></div>
+
+    <div class="content">
+        <h1>About BioBlox</h1>
+        <p>BioBlox is a fan-made Roblox tools site built by a player, for players. What started as a small side project
+            to help friends write better bios has grown into a suite of free tools used by thousands of Roblox players
+            every day.</p>
+
+        <div class="about-card">
+            <h2>The Story</h2>
+            <p>BioBlox was created in 2026 by Skinner, a long-time Roblox player who got tired of seeing the same
+                generic bios on every profile. The idea was simple: build a tool that generates unique, stylish bios
+                based on your personality, avatar style, and the games you actually play.</p>
+            <p>What started as a basic bio generator quickly expanded. Players kept asking for more tools, so BioBlox
+                grew to include a username generator, font generator, profile viewer, flex card creator, and dedicated
+                pages for every bio style imaginable. Every tool on BioBlox was built because a player asked for it.</p>
+            <p>BioBlox is not affiliated with Roblox Corporation. It is an independent, fan-made project built with love
+                for the Roblox community.</p>
+        </div>
+
+        <div class="about-card">
+            <h2>Who Made This</h2>
+            <p>BioBlox is a solo project built and maintained by <strong>Skinner</strong>. Everything from the design to
+                the code to the bio templates is created and curated by one person. This means updates happen at a human
+                pace, but every feature gets personal attention and care.</p>
+            <p>If you have ideas for new tools, bio styles, or improvements, reach out through the
+                <a href="contact-us" style="color: var(--purple); font-weight: 600; text-decoration: none;">Contact
+                    Us</a> page. Player feedback is what drives every update on BioBlox.
+            </p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Bios Generated</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Monthly Visitors</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Free Tools</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100K+</div>
+                <div class="stat-label">Bio Combinations</div>
+            </div>
+        </div>
+
+        <div class="about-card">
+            <h2>What BioBlox Offers</h2>
+            <p>Every tool on BioBlox is completely free with no sign-up required. Here is what is available:</p>
+            <div class="tools-list">
+                <div class="tool-item"><a href="/">Bio Generator</a> — Create unique Roblox bios</div>
+                <div class="tool-item"><a href="roblox-username-generator">Username Generator</a> — Find your next
+                    gamertag</div>
+                <div class="tool-item"><a href="roblox-font-generator">Font Generator</a> — 150+ fancy text styles
+                </div>
+                <div class="tool-item"><a href="roblox-profile-viewer">Profile Viewer</a> — Look up any Roblox account
+                </div>
+                <div class="tool-item"><a href="flexcard-generator">Flex Card Generator</a> — Shareable avatar cards
+                </div>
+                <div class="tool-item"><a href="grow-a-garden-roblox">Grow a Garden Guide</a> — Seeds, mutations, pets
+                </div>
+            </div>
+        </div>
+
+        <div class="about-card">
+            <h2>Connect With BioBlox</h2>
+            <p>Follow BioBlox for updates, new tools, and community content:</p>
+            <div class="social-links">
+                <a href="https://instagram.com/bioblox.fun" target="_blank" rel="noopener" class="social-link">
+                    📸 Instagram
+                </a>
+                <a href="https://x.com/bioblox_fun" target="_blank" rel="noopener" class="social-link">
+                    🐦 X / Twitter
+                </a>
+                <a href="mailto:support@bioblox.fun" class="social-link">
+                    📧 Email
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span>&copy; 2026 bioblox.fun</span>
+        <div class="footer-links">
+            <a href="about-us">About Us</a>
+            <a href="terms-and-conditions">Terms of Service</a>
+            <a href="privacy-policy">Privacy Policy</a>
+            <a href="contact-us">Contact Us</a>
+        </div>
+    </footer>
+
+    <script src="navbar.js"></script>
+</body>
+
+</html>

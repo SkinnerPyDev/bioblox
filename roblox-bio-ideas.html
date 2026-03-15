@@ -241,6 +241,7 @@
                     <div class="select-group">
                         <label>🎨 Style</label>
                         <select id="sel-style">
+                            <option selected>Neutral</option>
                             <option>Cute</option>
                             <option>Emo</option>
                             <option>Anime</option>
@@ -256,8 +257,9 @@
                     <div class="select-group">
                         <label>💀 Personality</label>
                         <select id="sel-personality">
+                            <option selected>Neutral</option>
                             <option>Shy</option>
-                            <option selected>Savage</option>
+                            <option>Savage</option>
                             <option>Soft</option>
                             <option>Mysterious</option>
                             <option>Chill</option>
@@ -282,7 +284,7 @@
                             <option>Livetopia</option>
                             <option>Greenville</option>
                             <option>Murder Mystery 2</option>
-                            <option>Any RP Game</option>
+                            <option selected>Any RP Game</option>
                         </select>
                     </div>
                 </div>
@@ -331,7 +333,7 @@
                     </div>
                     <div class="checkbox-item checked" id="chk-emoji" onclick="this.classList.toggle('checked')">
                         <span class="checkbox-box"></span>
-                        Add emojis ✨
+                        Add emojis 🎨
                     </div>
                 </div>
                 <div class="decorator-section">
@@ -351,11 +353,11 @@
 
         <div class="generate-section">
             <button class="btn-generate" onclick="generateBios()">
-                <span class="bounce">✨</span> GENERATE MY BIO <span class="bounce">✨</span>
+                <span class="bounce">🎯</span> GENERATE MY BIO <span class="bounce">🎯</span>
             </button>
         </div>
 
-        <div class="fun-divider"><span>⭐ 🌈 ⭐</span></div>
+        <div class="fun-divider"><span></span></div>
 
         <section class="results-section" id="results-section" style="display:none;">
             <div class="results-header"><span class="emoji">📋</span> Your Generated Bios</div>
@@ -376,7 +378,7 @@
         </div>
 
         <section class="preview-section" id="preview-section" style="display:none;">
-            <div class="fun-divider"><span>👀 🎮 👀</span></div>
+            <div class="fun-divider"><span></span></div>
             <div class="preview-header"><span class="emoji">📱</span> Roblox Profile Preview</div>
             <div class="roblox-preview-card">
                 <div class="roblox-avatar-area">
@@ -399,9 +401,9 @@
 
         <!-- WHAT IS A ROBLOX BIO -->
         <section class="about-section">
-            <div class="fun-divider"><span>💡 ✨ 💡</span></div>
+            <div class="fun-divider"><span></span></div>
             <div class="about-card">
-                <h2>📝 What Is a Roblox Bio?</h2>
+                <h2>What Is a Roblox Bio?</h2>
                 <p>A Roblox bio is the text that appears in the "About Me" section of your Roblox profile. It tells
                     other players who you are, what games you play, and what kind of vibe you bring to the server. A
                     well-written bio can make your profile stand out and help you attract friends, RP partners, and
@@ -415,23 +417,23 @@
         <!-- HOW TO CREATE A ROBLOX BIO -->
         <section class="about-section">
             <div class="about-card">
-                <h2>🎯 How to Create a Great Roblox Bio</h2>
+                <h2>How to Create a Great Roblox Bio</h2>
                 <p>Creating a great Roblox bio does not have to be hard. Follow these simple tips to make your profile
                     look amazing:</p>
                 <div class="about-features">
-                    <div class="about-feature"><span class="about-icon">1️⃣</span><strong>Pick Your Vibe</strong>
+                    <div class="about-feature"><span class="about-icon">1</span><strong>Pick Your Vibe</strong>
                         <p>Decide if you want a cute, cool, aesthetic, funny, or edgy bio. Your bio should match your
                             avatar and the games you play.</p>
                     </div>
-                    <div class="about-feature"><span class="about-icon">2️⃣</span><strong>Keep It Clean</strong>
+                    <div class="about-feature"><span class="about-icon">2</span><strong>Keep It Clean</strong>
                         <p>Use line breaks and spacing to make your bio easy to read. Avoid walls of text that nobody
                             will bother reading.</p>
                     </div>
-                    <div class="about-feature"><span class="about-icon">3️⃣</span><strong>Add Some Flair</strong>
+                    <div class="about-feature"><span class="about-icon">3</span><strong>Add Some Flair</strong>
                         <p>Use emojis, decorative borders, and special characters to make your bio visually appealing
                             and unique.</p>
                     </div>
-                    <div class="about-feature"><span class="about-icon">4️⃣</span><strong>Make It Personal</strong>
+                    <div class="about-feature"><span class="about-icon">4</span><strong>Make It Personal</strong>
                         <p>Include your character name, age, pronouns, and personality traits. Personal bios get more
                             attention than generic ones.</p>
                     </div>
@@ -442,11 +444,11 @@
         <!-- EXAMPLE BIOS -->
         <section class="about-section">
             <div class="about-card">
-                <h2>💎 Roblox Bio Ideas You Can Copy and Paste</h2>
+                <h2>Roblox Bio Ideas You Can Copy and Paste</h2>
                 <p>Here are some of the best Roblox bio ideas organized by style. Just copy any bio you like and paste
                     it into your Roblox profile!</p>
 
-                <h3 id="aesthetic-bios">✨ Aesthetic Roblox Bio Ideas</h3>
+                <h3 id="aesthetic-bios">Aesthetic Roblox Bio Ideas</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>✧˚ · dreaming in pastels ·˚✧</p>
@@ -467,9 +469,6 @@
                         <p>butterfly soul in a concrete world 🦋</p>
                     </div>
                     <div class="about-feature">
-                        <p>made of stardust and good vibes ✨</p>
-                    </div>
-                    <div class="about-feature">
                         <p>chasing sunsets, collecting memories 🌻</p>
                     </div>
                     <div class="about-feature">
@@ -480,7 +479,7 @@
                     </div>
                 </div>
 
-                <h3 id="funny-bios">😂 Funny Roblox Bio Ideas</h3>
+                <h3 id="funny-bios">Funny Roblox Bio Ideas</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>I came, I saw, I forgot what I was doing 💀</p>
@@ -514,7 +513,7 @@
                     </div>
                 </div>
 
-                <h3 id="cool-bios">🔥 Cool Roblox Bio Ideas</h3>
+                <h3 id="cool-bios">Cool Roblox Bio Ideas</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>leveling up in real life ⚡</p>
@@ -548,7 +547,7 @@
                     </div>
                 </div>
 
-                <h3 id="cute-bios">💖 Cute Roblox Bio Ideas</h3>
+                <h3 id="cute-bios">Cute Roblox Bio Ideas</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>sweet like honey, soft like clouds 🍯</p>
@@ -560,12 +559,6 @@
                         <p>small but mighty 💪✨</p>
                     </div>
                     <div class="about-feature">
-                        <p>collecting hearts and good vibes 💕</p>
-                    </div>
-                    <div class="about-feature">
-                        <p>be kind, be you, be awesome 🌟</p>
-                    </div>
-                    <div class="about-feature">
                         <p>just a little bean trying my best 🫘</p>
                     </div>
                     <div class="about-feature">
@@ -575,14 +568,11 @@
                         <p>powered by love and Robux 💰</p>
                     </div>
                     <div class="about-feature">
-                        <p>spreading sparkles wherever I go ✨</p>
-                    </div>
-                    <div class="about-feature">
                         <p>your new favorite Roblox bestie 🥰</p>
                     </div>
                 </div>
 
-                <h3 id="emo-bios">🖤 Emo and Edgy Roblox Bio Ideas</h3>
+                <h3 id="emo-bios">Emo and Edgy Roblox Bio Ideas</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>drowning in darkness, thriving in chaos 🖤</p>
@@ -616,7 +606,7 @@
                     </div>
                 </div>
 
-                <h3 id="baddie-bios">💅 Baddie Roblox Bio Ideas</h3>
+                <h3 id="baddie-bios">Baddie Roblox Bio Ideas</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>too pretty to care, too savage to explain 💅</p>
@@ -643,20 +633,17 @@
                         <p>main character in every server I join 🎬</p>
                     </div>
                     <div class="about-feature">
-                        <p>they copy my style but can never copy my energy 💫</p>
+                        <p>they copy my style but can never copy my energy</p>
                     </div>
                     <div class="about-feature">
                         <p>born to stand out, not to fit in 🖤</p>
                     </div>
                 </div>
 
-                <h3 id="short-bios">📝 Short Roblox Bio Ideas</h3>
+                <h3 id="short-bios">Short Roblox Bio Ideas</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>built different.</p>
-                    </div>
-                    <div class="about-feature">
-                        <p>main character energy ✨</p>
                     </div>
                     <div class="about-feature">
                         <p>just vibing 🎶</p>
@@ -684,7 +671,7 @@
                     </div>
                 </div>
 
-                <h3 id="rp-bios">🎭 RP Roblox Bio Ideas</h3>
+                <h3 id="rp-bios">RP Roblox Bio Ideas</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>Name: [Your Name] | Age: [Age] | Pronouns: [Pronouns] | Status: Single | Vibe: Chill 🎮</p>
@@ -718,7 +705,7 @@
                     </div>
                 </div>
 
-                <h3 id="anime-bios">🌸 Anime Roblox Bio Ideas</h3>
+                <h3 id="anime-bios">Anime Roblox Bio Ideas</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>my ninja way is to never give up 🍥</p>
@@ -757,7 +744,7 @@
         <!-- WHY ROBLOX BIOS MATTER -->
         <section class="about-section">
             <div class="about-card">
-                <h2>🌟 Why Roblox Bios Matter</h2>
+                <h2>Why Roblox Bios Matter</h2>
                 <p>Your Roblox bio is often the first thing other players see when they visit your profile. A creative
                     and well-crafted bio can help you:</p>
                 <div class="about-features">
@@ -784,7 +771,7 @@
 
         <!-- FAQ SECTION -->
         <section class="faq-section">
-            <div class="fun-divider"><span>❓ 💬 ❓</span></div>
+            <div class="fun-divider"><span></span></div>
             <h2 class="faq-title">Frequently Asked Questions About Roblox Bio Ideas</h2>
             <div class="faq-list">
                 <div class="faq-item" onclick="this.classList.toggle('open')">
@@ -875,7 +862,7 @@
         <footer>
             <span>&copy; 2026 bioblox.fun</span>
             <div class="footer-links">
-                <a href="terms-and-conditions">Terms of Service</a>
+                <a href="about-us">About Us</a><a href="terms-and-conditions">Terms of Service</a>
                 <a href="privacy-policy">Privacy Policy</a>
                 <a href="contact-us">Contact Us</a>
             </div>

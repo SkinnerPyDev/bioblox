@@ -58,25 +58,7 @@
         <div class="shape shape-5"></div>
     </div>
     <div class="page-wrapper">
-                        <nav>
-            <a href="/" class="logo">
-                <img src="logo.webp" alt="BioBlox - Free Roblox Bio Ideas Generator"
-                    style="height: 90px; width: auto; object-fit: contain; margin: -20px 0;">
-            </a>
-            <ul class="nav-links">
-                <li><a href="/" class="active">Bio Generator</a></li>
-                <li><a href="flexcard-generator">Flex Card</a></li>
-                <li class="nav-dropdown">
-                    <a href="#">Tools ▾</a>
-                    <ul class="nav-dropdown-menu">
-                        <li><a href="roblox-username-generator">🎮 Username Generator</a></li>
-                        <li><a href="roblox-font-generator">🔤 Font Generator</a></li>
-                    </ul>
-                </li>
-                <li><a href="blog">Blog</a></li>
-            </ul>
-            <div class="mobile-menu"><span></span><span></span><span></span></div>
-        </nav>
+        <div id="navbar"></div>
 
         <section class="hero">
             <h1>Roblox Flex Bio</h1>
@@ -88,6 +70,7 @@
             <div class="form-card">
                 <div class="dropdowns-row">
                     <div class="select-group"><label>🎨 Style</label><select id="sel-style">
+                            <option selected>Neutral</option>
                             <option>Cute</option>
                             <option>Emo</option>
                             <option>Anime</option>
@@ -100,8 +83,9 @@
                             <option>Baddie</option>
                         </select></div>
                     <div class="select-group"><label>💀 Personality</label><select id="sel-personality">
+                            <option selected>Neutral</option>
                             <option>Shy</option>
-                            <option selected>Savage</option>
+                            <option>Savage</option>
                             <option>Soft</option>
                             <option>Mysterious</option>
                             <option>Chill</option>
@@ -123,7 +107,7 @@
                             <option>Livetopia</option>
                             <option>Greenville</option>
                             <option>Murder Mystery 2</option>
-                            <option>Any RP Game</option>
+                            <option selected>Any RP Game</option>
                         </select></div>
                 </div>
                 <div class="inputs-grid">
@@ -150,7 +134,7 @@
                                     class="length-icon">📜</span> Long</button></div>
                     </div>
                     <div class="checkbox-item checked" id="chk-emoji" onclick="this.classList.toggle('checked')"><span
-                            class="checkbox-box"></span>Add emojis ✨</div>
+                            class="checkbox-box"></span>Add emojis 🎨</div>
                 </div>
                 <div class="decorator-section"><label class="decorator-label">✦ Border Style</label>
                     <div class="decorator-options" id="decorator-options"><button class="deco-btn active"
@@ -166,8 +150,8 @@
         </section>
 
         <div class="generate-section"><button class="btn-generate" onclick="generateBios()"><span
-                    class="bounce">✨</span> GENERATE MY BIO <span class="bounce">✨</span></button></div>
-        <div class="fun-divider"><span>⭐ 🌈 ⭐</span></div>
+                    class="bounce">✨</span> GENERATE MY BIO <span class="bounce">🎯</span></button></div>
+        <div class="fun-divider"><span></span></div>
 
         <section class="results-section" id="results-section" style="display:none;">
             <div class="results-header"><span class="emoji">📋</span> Your Generated Bios</div>
@@ -183,7 +167,7 @@
                     Preview</button></div>
         </div>
         <section class="preview-section" id="preview-section" style="display:none;">
-            <div class="fun-divider"><span>👀 🎮 👀</span></div>
+            <div class="fun-divider"><span></span></div>
             <div class="preview-header"><span class="emoji">📱</span> Roblox Profile Preview</div>
             <div class="roblox-preview-card">
                 <div class="roblox-avatar-area">
@@ -205,9 +189,9 @@
         </section>
 
         <section class="about-section">
-            <div class="fun-divider"><span>💡 ✨ 💡</span></div>
+            <div class="fun-divider"><span></span></div>
             <div class="about-card">
-                <h2>💎 What Is a Roblox Flex Bio?</h2>
+                <h2>What Is a Roblox Flex Bio?</h2>
                 <p>A Roblox flex bio is a profile description designed to show off your accomplishments, rare items,
                     avatar drip, and gaming stats. It tells other players that you are a serious player with style.</p>
                 <p>Flex bios are popular among players who have invested time and effort into their Roblox account.
@@ -232,10 +216,10 @@
 
         <section class="about-section">
             <div class="about-card">
-                <h2>🏆 Roblox Flex Bios You Can Copy</h2>
+                <h2>Roblox Flex Bios You Can Copy</h2>
                 <p>Here are the best flex bio ideas for your Roblox profile. Copy and paste your favorite!</p>
 
-                <h3>💎 Item and Drip Flex Bios</h3>
+                <h3>Item and Drip Flex Bios</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>rare items collector, common sense included 💎</p>
@@ -269,7 +253,7 @@
                     </div>
                 </div>
 
-                <h3>📊 Stats and Achievement Flex Bios</h3>
+                <h3>Stats and Achievement Flex Bios</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>playing since 2016, winning since day one 🏅</p>
@@ -303,7 +287,7 @@
                     </div>
                 </div>
 
-                <h3>💰 Robux and Wealth Flex Bios</h3>
+                <h3>Robux and Wealth Flex Bios</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>Robux rich, time poor 💸</p>
@@ -337,7 +321,7 @@
                     </div>
                 </div>
 
-                <h3>🔥 Attitude Flex Bios</h3>
+                <h3>Attitude Flex Bios</h3>
                 <div class="about-features">
                     <div class="about-feature">
                         <p>I did not choose the flex life, the flex life chose me 💪</p>
@@ -375,21 +359,21 @@
 
         <section class="about-section">
             <div class="about-card">
-                <h2>💡 How to Write the Perfect Flex Bio</h2>
+                <h2>How to Write the Perfect Flex Bio</h2>
                 <div class="about-features">
-                    <div class="about-feature"><span class="about-icon">1️⃣</span><strong>Pick Your Best
+                    <div class="about-feature"><span class="about-icon">1</span><strong>Pick Your Best
                             Achievement</strong>
                         <p>Choose what you are most proud of: rare items, account age, follower count, or game stats.
                         </p>
                     </div>
-                    <div class="about-feature"><span class="about-icon">2️⃣</span><strong>Stay Confident, Not
+                    <div class="about-feature"><span class="about-icon">2</span><strong>Stay Confident, Not
                             Arrogant</strong>
                         <p>The best flex bios sound cool without being aggressive. Swagger over shouting.</p>
                     </div>
-                    <div class="about-feature"><span class="about-icon">3️⃣</span><strong>Keep It Short</strong>
+                    <div class="about-feature"><span class="about-icon">3</span><strong>Keep It Short</strong>
                         <p>Flex bios hit harder when they are punchy. One or two lines is perfect.</p>
                     </div>
-                    <div class="about-feature"><span class="about-icon">4️⃣</span><strong>Match Your Avatar</strong>
+                    <div class="about-feature"><span class="about-icon">4</span><strong>Match Your Avatar</strong>
                         <p>Your flex bio should match your avatar drip. An expensive outfit with a weak bio is a missed
                             opportunity.</p>
                     </div>
@@ -398,7 +382,7 @@
         </section>
 
         <section class="faq-section">
-            <div class="fun-divider"><span>❓ 💬 ❓</span></div>
+            <div class="fun-divider"><span></span></div>
             <h2 class="faq-title">Frequently Asked Questions About Roblox Flex Bios</h2>
             <div class="faq-list">
                 <div class="faq-item" onclick="this.classList.toggle('open')">
@@ -449,7 +433,7 @@
 
         <footer>
             <span>&copy; 2026 bioblox.fun</span>
-            <div class="footer-links"><a href="terms-and-conditions">Terms of Service</a><a
+            <div class="footer-links"><a href="about-us">About Us</a><a href="terms-and-conditions">Terms of Service</a><a
                     href="privacy-policy">Privacy Policy</a><a href="contact-us">Contact Us</a></div>
         </footer>
     </div>
